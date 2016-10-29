@@ -19,8 +19,8 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
 public class Team8702Test extends RobotConfiguration {
 
     //motors
-    public DcMotor motor1;
-    public DcMotor motor2;
+    public DcMotor motorR;
+    public DcMotor motorL;
 
 
     /**
@@ -49,9 +49,9 @@ public class Team8702Test extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-        motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-        motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
-        motor2.setDirection(DcMotor.Direction.REVERSE);
+        motorR = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
+        motorL = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
+        motorL.setDirection(DcMotor.Direction.REVERSE);
 
 
     }
