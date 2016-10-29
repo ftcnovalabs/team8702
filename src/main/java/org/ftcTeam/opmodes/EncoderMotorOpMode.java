@@ -39,7 +39,7 @@ public class EncoderMotorOpMode extends ActiveOpMode {
 
         //specify configuration name save from scan operation
         robot = Team8702Test.newConfig(hardwareMap, getTelemetryUtil());
-        motorToEncoder = new MotorToEncoder(  this, robot.motor1);
+        motorToEncoder = new MotorToEncoder(  this, robot.motorR);
         motorToEncoder.setName("motor1");
 
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
