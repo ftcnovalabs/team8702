@@ -29,6 +29,7 @@ public class EncoderMotorOpMode extends ActiveOpMode {
     private Team8702Test robot;
 
     private MotorToEncoder motorToEncoder;
+    private MotorToEncoder motorToEncoderL;
     private int step;
 
     /**
@@ -40,7 +41,9 @@ public class EncoderMotorOpMode extends ActiveOpMode {
         //specify configuration name save from scan operation
         robot = Team8702Test.newConfig(hardwareMap, getTelemetryUtil());
         motorToEncoder = new MotorToEncoder(  this, robot.motorR);
+        motorToEncoderL = new MotorToEncoder( this, robot.motorL);
         motorToEncoder.setName("motor1");
+        motorToEncoder.setName("motor2");
 
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
@@ -69,8 +72,10 @@ public class EncoderMotorOpMode extends ActiveOpMode {
         switch (step) {
             case 1:
 
-                //full power , forward for 8880
-                targetReached = motorToEncoder.runToTarget(1, 4000,
+                //full power , forward for 1000
+                targetReached = motorToEncoder.runToTarget(1,1000,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                targetReached = motorToEncoderL.runToTarget(1, 1000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
                     step++;
@@ -78,8 +83,10 @@ public class EncoderMotorOpMode extends ActiveOpMode {
                 break;
 
             case 2:
-                //  1/4 power backward for 1000
-                targetReached = motorToEncoder.runToTarget(0.25, 1000,
+                //  90 degree turn Left
+                targetReached = motorToEncoder.runToTarget(1, 900,
+                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                targetReached = motorToEncoderL.runToTarget(1, 900,
                         MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
                     step++;
