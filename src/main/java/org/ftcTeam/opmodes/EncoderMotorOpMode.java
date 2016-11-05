@@ -53,7 +53,7 @@ public class EncoderMotorOpMode extends ActiveOpMode {
     @Override
     protected void onStart() throws InterruptedException  {
         super.onStart();
-        step = 1;
+        step = 2;
     }
 
     /**
@@ -70,24 +70,22 @@ public class EncoderMotorOpMode extends ActiveOpMode {
         boolean targetReached = false;
 
         switch (step) {
-            case 1:
+           /* case 1:
 
-                //full power , forward for 1000
-                targetReached = motorToEncoder.runToTarget(1,1000,
+                //full power , forward for 1000, 3ft in length
+                targetReached = motorToEncoder.runToTarget(1,1850,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(1, 1000,
+                targetReached = motorToEncoderL.runToTarget(1, 1850,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
                     step++;
                 }
                 break;
-
-            case 2:
+*/
+           case 2:
                 //  90 degree turn Left
-                targetReached = motorToEncoder.runToTarget(1, 900,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(1, 900,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                targetReached = motorToEncoder.runToTarget(0.57, 1475,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
                     step++;
                 }
