@@ -1,13 +1,22 @@
 package org.ftcTeam.configurations;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.ftcTeam.opmodes.EncoderMotorOpMode;
+import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.RobotConfiguration;
+import org.ftcbootstrap.components.ColorSensorComponent;
+import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
+import org.ftcbootstrap.demos.navbot.opmodes.EncoderMotorTest;
+import  android.graphics.Color;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
+import org.ftcbootstrap.ActiveOpMode;
+
 
 /**
  * FTCTeamRobot Saved Configuration
@@ -22,6 +31,11 @@ public class Team8702Test extends RobotConfiguration {
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
+    public int EncoderValue;
+    public ColorSensor colorSensor;
+    public ColorSensorComponent.ColorSensorDevice device;
+    public enum ColorSensorDevice {MODERN_ROBITICS_I2C}
+
 
 
     /**
@@ -39,6 +53,9 @@ public class Team8702Test extends RobotConfiguration {
 
     }
 
+
+
+
     public void FORWARD (double inches)
     {
         inches = inches * 51.4;
@@ -49,13 +66,14 @@ public class Team8702Test extends RobotConfiguration {
         inches = inches/51.4;
     }
 
-    public void RIGHT (double degrees)
+    public void RIGHT (int degrees)
     {
+      degrees = ((degrees/EncoderValue) * (90/1100));
     }
 
     public void LEFT (double degrees)
     {
-
+        degrees = ((degrees/(EncoderValue*-1)) * (90/1100));
     }
 
     /**
