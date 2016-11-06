@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.ftcTeam.opmodes.EncoderMotorOpMode;
 import org.ftcbootstrap.RobotConfiguration;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
 
@@ -17,7 +18,7 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
  * saved configuration on the phone.
  */
 public class Team8702Test extends RobotConfiguration {
-
+    //51.4 = 1 inch
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
@@ -35,6 +36,25 @@ public class Team8702Test extends RobotConfiguration {
         Team8702Test config = new Team8702Test();
         config.init(hardwareMap, telemetryUtil);
         return config;
+
+    }
+
+    public void FORWARD (double inches)
+    {
+        inches = inches * 51.4;
+    }
+
+    public void BACKWARD (double inches)
+    {
+        inches = inches/51.4;
+    }
+
+    public void RIGHT (double degrees)
+    {
+    }
+
+    public void LEFT (double degrees)
+    {
 
     }
 
