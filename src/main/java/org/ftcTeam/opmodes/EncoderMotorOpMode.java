@@ -84,8 +84,10 @@ public class EncoderMotorOpMode extends ActiveOpMode {
 */
            case 2:
                 //  90 degree turn Left
-                targetReached = motorToEncoder.runToTarget(0.57, 1475,
+                targetReached = motorToEncoder.runToTarget(1, 1120,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+               targetReached = motorToEncoderL.runToTarget(1, 1120,
+                       MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
                     step++;
                 }
