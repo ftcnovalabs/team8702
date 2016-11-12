@@ -32,12 +32,8 @@ public class Team8702Test extends RobotConfiguration {
     public DcMotor motorR;
     public DcMotor motorL;
     public int EncoderValue;
-    public ColorSensor colorSensor;
-    public ColorSensorComponent.ColorSensorDevice device;
-    public enum ColorSensorDevice {MODERN_ROBITICS_I2C}
-
-
-
+    public ColorSensorComponent colorSensorComponent;
+    public ColorSensor mrColor1;
     /**
      * Factory method for this class
      *
@@ -52,6 +48,7 @@ public class Team8702Test extends RobotConfiguration {
         return config;
 
     }
+
 
 
 
@@ -90,7 +87,8 @@ public class Team8702Test extends RobotConfiguration {
         motorR = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
         motorL = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
         motorL.setDirection(DcMotor.Direction.REVERSE);
-
+        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
+        mrColor1.enableLed(true);
 
     }
 
