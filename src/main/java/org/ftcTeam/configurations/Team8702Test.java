@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.ftcTeam.opmodes.ColorValue;
 import org.ftcTeam.opmodes.EncoderMotorOpMode;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.RobotConfiguration;
@@ -32,7 +33,7 @@ public class Team8702Test extends RobotConfiguration {
     public DcMotor motorR;
     public DcMotor motorL;
     public int EncoderValue;
-    public ColorSensorComponent colorSensorComponent;
+
     public ColorSensor mrColor1;
     /**
      * Factory method for this class
@@ -76,6 +77,7 @@ public class Team8702Test extends RobotConfiguration {
     /**
      * Assign your class instance variables to the saved device names in the hardware map
      *
+     *
      * @param hardwareMap
      * @param telemetryUtil
      */
@@ -90,9 +92,9 @@ public class Team8702Test extends RobotConfiguration {
         mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
         mrColor1.enableLed(true);
 
+
+
+
     }
-
-
-
 
 }
