@@ -33,9 +33,6 @@ public class EncoderMotorOpMode extends ActiveOpMode {
     private MotorToEncoder motorToEncoder;
     private MotorToEncoder motorToEncoderL;
     private int step;
-    String blue = "blue";
-    String red = "red";
-    String green = "green";
     public ColorSensorComponent colorSensorComponent;
 
     /**
@@ -127,6 +124,7 @@ public class EncoderMotorOpMode extends ActiveOpMode {
 
 
     }
+
     public ColorValue getColor() {
         int Red = colorSensorComponent.getR();
         int Blue = colorSensorComponent.getB();
@@ -143,8 +141,6 @@ public class EncoderMotorOpMode extends ActiveOpMode {
             return ColorValue.BLUE;
         }
         return ColorValue.ZILCH;
-
-
     }
 }
 
