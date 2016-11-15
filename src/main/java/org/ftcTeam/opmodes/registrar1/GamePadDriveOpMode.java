@@ -23,9 +23,6 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
     private Team8702Test robot;
     private GamePadTankDrive gamePadTankDrive;
-    String blue = "blue";
-    String red = "red";
-    String green = "green";
     public ColorSensorComponent colorSensorComponent;
 
     /**
