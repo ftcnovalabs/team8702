@@ -3,11 +3,14 @@ package org.ftcTeam.opmodes.registrar1;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.ftcTeam.configurations.FTCTeamRobot;
+import org.ftcTeam.configurations.Team8702Prod;
 import org.ftcTeam.configurations.Team8702Test;
 import org.ftcTeam.opmodes.ColorValue;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.ColorSensorComponent;
+import org.ftcbootstrap.components.operations.motors.GamePadMotor;
 import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
+import org.ftcbootstrap.components.operations.servos.GamePadServo;
 
 
 /**
@@ -21,9 +24,10 @@ import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
 @TeleOp
 public class GamePadDriveOpMode extends ActiveOpMode {
 
-    private Team8702Test robot;
+    private Team8702Prod robot;
     private GamePadTankDrive gamePadTankDrive;
-    public ColorSensorComponent colorSensorComponent;
+
+    private GamePadMotor gamePadMotor;
 
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
@@ -31,14 +35,12 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     @Override
     protected void onInit() {
 
-        robot = Team8702Test.newConfig(hardwareMap, getTelemetryUtil());
+        robot = Team8702Prod.newConfig(hardwareMap, getTelemetryUtil());
 
         //Note The Telemetry Utility is designed to let you organize all telemetry data before sending it to
         //the Driver station via the sendTelemetry command
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
-        colorSensorComponent = new ColorSensorComponent(this, robot.mrColor1, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
-        colorSensorComponent.enableLed(false);
 
     }
 
@@ -48,7 +50,7 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
         //create the operation  to perform a tank drive using the gamepad joysticks.
         gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-
+        gamePadMotor = new GamePadMotor(this, gamepad2, robot.getAnalockStick(), GamePadMotor.Control.LEFT_STICK_Y );
     }
 
     /**
@@ -62,35 +64,17 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
         //update the motors with the gamepad joystick values
         gamePadTankDrive.update();
+        gamePadMotor.update();
 
-        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
-        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
-        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
-        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
+//        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
+//        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
+//        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
+//        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
         //send any telemetry that may have been added in the above operations
         getTelemetryUtil().sendTelemetry();
-        getTelemetryUtil().addData("Color",  getColor().toString());
 
     }
 
 
-    public ColorValue getColor() {
-        int Red = colorSensorComponent.getR();
-        int Blue = colorSensorComponent.getB();
-        int Green = colorSensorComponent.getG();
-
-        boolean redboolean = colorSensorComponent.isRed(Red, Blue, Green);
-
-        if (redboolean) {
-            return ColorValue.RED;
-        }
-        boolean blueboolean = colorSensorComponent.isBlue(Red, Blue, Green);
-
-        if(blueboolean) {
-            return ColorValue.BLUE;
-        }
-        return ColorValue.ZILCH;
-
 
     }
-}

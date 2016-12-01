@@ -53,6 +53,7 @@ public class EncoderMotorOpMode extends ActiveOpMode {
         colorSensorComponent = new ColorSensorComponent(this, robot.mrColor1, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
         colorSensorComponent.enableLed(true);
 
+
     }
 
     @Override

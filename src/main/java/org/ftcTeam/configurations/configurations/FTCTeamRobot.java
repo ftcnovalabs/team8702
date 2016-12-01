@@ -1,12 +1,12 @@
-package org.ftcTeam.configurations;
+package org.ftcTeam.configurations.configurations;
 
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.ftcbootstrap.RobotConfiguration;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
-
 
 /**
  * FTCTeamRobot Saved Configuration
@@ -16,13 +16,15 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
  * It is also assumed that the device names in the 'init()' method below are the same  as the devices named for the
  * saved configuration on the phone.
  */
-public class Team8702Prod extends RobotConfiguration {
-    //51.4 = 1 inch
-    //motors
-    public DcMotor motorR;
-    public DcMotor motorL;
-    public DcMotor analogStick;
+public class FTCTeamRobot extends RobotConfiguration {
 
+    //sensors
+    public TouchSensor touch;
+
+    //motors
+    public DcMotor motor1;
+    public DcMotor motor2;
+    public Servo servo;
 
     /**
      * Factory method for this class
@@ -31,16 +33,16 @@ public class Team8702Prod extends RobotConfiguration {
      * @param telemetryUtil
      * @return
      */
-    public static Team8702Prod newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
+    public static FTCTeamRobot newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
 
-        Team8702Prod config = new Team8702Prod();
+        FTCTeamRobot config = new FTCTeamRobot();
         config.init(hardwareMap, telemetryUtil);
         return config;
+
     }
 
     /**
      * Assign your class instance variables to the saved device names in the hardware map
-     *
      *
      * @param hardwareMap
      * @param telemetryUtil
@@ -50,27 +52,16 @@ public class Team8702Prod extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-//        motorR = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-//        motorL = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
-//        motorL.setDirection(DcMotor.Direction.REVERSE);
-//        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
-//        mrColor1.enableLed(true);
-        analogStick = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
+        touch = (TouchSensor) getHardwareOn("touch", hardwareMap.touchSensor);
+        servo = (Servo) getHardwareOn("servo", hardwareMap.servo);
+        motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
+        motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
+        motor2.setDirection(DcMotor.Direction.REVERSE);
+
 
     }
 
-    public void FORWARD (double inches)
-    {
-        inches = inches * 51.4;
-    }
 
-    public void BACKWARD (double inches)
-    {
-        inches = inches/51.4;
-    }
 
-    public DcMotor getAnalockStick() {
-        return analogStick;
-    }
 
 }

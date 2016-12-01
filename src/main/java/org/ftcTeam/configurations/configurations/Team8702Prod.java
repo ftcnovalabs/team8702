@@ -1,22 +1,11 @@
-package org.ftcTeam.configurations;
+package org.ftcTeam.configurations.configurations;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import org.ftcTeam.opmodes.ColorValue;
-import org.ftcTeam.opmodes.EncoderMotorOpMode;
-import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.RobotConfiguration;
-import org.ftcbootstrap.components.ColorSensorComponent;
-import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
-import org.ftcbootstrap.demos.navbot.opmodes.EncoderMotorTest;
-import  android.graphics.Color;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
-import org.ftcbootstrap.ActiveOpMode;
 
 
 /**
@@ -27,15 +16,15 @@ import org.ftcbootstrap.ActiveOpMode;
  * It is also assumed that the device names in the 'init()' method below are the same  as the devices named for the
  * saved configuration on the phone.
  */
-public class Team8702Test extends RobotConfiguration {
+public class Team8702Prod extends RobotConfiguration {
     //51.4 = 1 inch
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
     public int EncoderValue;
-
-
     public ColorSensor mrColor1;
+
+
     /**
      * Factory method for this class
      *
@@ -43,36 +32,11 @@ public class Team8702Test extends RobotConfiguration {
      * @param telemetryUtil
      * @return
      */
-    public static Team8702Test newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
+    public static Team8702Prod newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
 
-        Team8702Test config = new Team8702Test();
+        Team8702Prod config = new Team8702Prod();
         config.init(hardwareMap, telemetryUtil);
         return config;
-
-    }
-
-
-
-
-
-    public void FORWARD (double inches)
-    {
-        inches = inches * 51.4;
-    }
-
-    public void BACKWARD (double inches)
-    {
-        inches = inches/51.4;
-    }
-
-    public void RIGHT (int degrees)
-    {
-      degrees = ((degrees/EncoderValue) * (90/1100));
-    }
-
-    public void LEFT (double degrees)
-    {
-        degrees = ((degrees/(EncoderValue*-1)) * (90/1100));
     }
 
     /**
@@ -92,10 +56,26 @@ public class Team8702Test extends RobotConfiguration {
         motorL.setDirection(DcMotor.Direction.REVERSE);
         mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
         mrColor1.enableLed(true);
+    }
 
+    public void FORWARD (double inches)
+    {
+        inches = inches * 51.4;
+    }
 
+    public void BACKWARD (double inches)
+    {
+        inches = inches/51.4;
+    }
 
+    public void RIGHT (int degrees)
+    {
+        degrees = ((degrees/EncoderValue) * (90/1100));
+    }
 
+    public void LEFT (double degrees)
+    {
+        degrees = ((degrees/(EncoderValue*-1)) * (90/1100));
     }
 
 }
