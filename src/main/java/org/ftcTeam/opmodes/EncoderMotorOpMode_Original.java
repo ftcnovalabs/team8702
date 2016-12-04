@@ -26,7 +26,7 @@ import org.ftcbootstrap.components.ColorSensorComponent;
 
 
 @Autonomous
-public class EncoderMotorOpMode extends ActiveOpMode {
+public class EncoderMotorOpMode_Original extends ActiveOpMode {
 
     private Team8702Test robot;
 
@@ -69,13 +69,9 @@ public class EncoderMotorOpMode extends ActiveOpMode {
      */
     @Override
     protected void activeLoop() throws InterruptedException {
-        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
-        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
-        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
-        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
+
         //send any telemetry that may have been added in the above operations
         getTelemetryUtil().sendTelemetry();
-        getTelemetryUtil().addData("Color",  getColor().toString());
 
 
 
@@ -84,18 +80,18 @@ public class EncoderMotorOpMode extends ActiveOpMode {
         boolean targetReached = false;
 
         switch (step) {
-           /* case 1:
+            case 1:
 
                 //full power , forward for 1000, 3ft in length
-                targetReached = motorToEncoder.runToTarget(1,1850,
+                targetReached = motorToEncoder.runToTarget(0.5, 1950,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(1, 1850,
+
+                targetReached = motorToEncoderL.runToTarget(0.5, 1950,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
-                    step++;
                 }
                 break;
-*/
+
            case 2:
                 //  90 degree turn Left
                 targetReached = motorToEncoder.runToTarget(1, 1120,
@@ -126,23 +122,7 @@ public class EncoderMotorOpMode extends ActiveOpMode {
 
     }
 
-    public ColorValue getColor() {
-        int Red = colorSensorComponent.getR();
-        int Blue = colorSensorComponent.getB();
-        int Green = colorSensorComponent.getG();
 
-        boolean redboolean = colorSensorComponent.isRed(Red, Blue, Green);
-
-        if (redboolean) {
-            return ColorValue.RED;
-        }
-        boolean blueboolean = colorSensorComponent.isBlue(Red, Blue, Green);
-
-        if(blueboolean) {
-            return ColorValue.BLUE;
-        }
-        return ColorValue.ZILCH;
-    }
 }
 
 

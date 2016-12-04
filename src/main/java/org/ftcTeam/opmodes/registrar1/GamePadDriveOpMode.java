@@ -22,8 +22,8 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     private Team8702Prod robot;
     private GamePadTankDrive gamePadTankDrive;
    private GamePadMotor analogGamePad;
-    private GamePadMotor intakeGamePad;
-    private GamePadMotor conveyorBeltGamePad;
+    private GamePadMotor intakeConveyorGamePad;
+    private GamePadMotor trebuchetGamePad;
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
      */
@@ -44,10 +44,10 @@ public class GamePadDriveOpMode extends ActiveOpMode {
         super.onStart();
 
         //create the operation  to perform a tank drive using the gamepad joysticks.
-        gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-        analogGamePad = new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
-        intakeGamePad = new GamePadMotor(this, gamepad2, robot.intakeMotor, GamePadMotor.Control.A_BUTTON);
-        conveyorBeltGamePad = new GamePadMotor(this, gamepad2, robot.conveyorBeltMotor, GamePadMotor.Control.A_BUTTON);
+        gamePadTankDrive =    new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
+        analogGamePad =       new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
+        intakeConveyorGamePad =       new GamePadMotor(this, gamepad2, robot.intakeConveyorMotor, GamePadMotor.Control.A_BUTTON);
+        trebuchetGamePad =    new GamePadMotor(this, gamepad2, robot.trebuchetMotor, GamePadMotor.Control.RIGHT_BUMPER);
     }
 
     /**
@@ -62,8 +62,8 @@ public class GamePadDriveOpMode extends ActiveOpMode {
         //update the motors with the gamepad joystick values
        gamePadTankDrive.update();
         analogGamePad.update();
-        intakeGamePad.update();
-        conveyorBeltGamePad.update();
+        intakeConveyorGamePad.update();
+        trebuchetGamePad.update();
 
         getTelemetryUtil().sendTelemetry();
 

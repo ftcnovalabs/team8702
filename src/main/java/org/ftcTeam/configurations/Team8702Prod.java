@@ -21,8 +21,8 @@ public class Team8702Prod extends RobotConfiguration {
     public DcMotor motorR;
     public DcMotor motorL;
     public DcMotor analogMotor;
-    public DcMotor intakeMotor;
-    public DcMotor conveyorBeltMotor;
+    public DcMotor intakeConveyorMotor;
+    public DcMotor trebuchetMotor;
 
 
     /**
@@ -56,8 +56,8 @@ public class Team8702Prod extends RobotConfiguration {
           motorL.setDirection(DcMotor.Direction.REVERSE);
           analogMotor = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
           analogMotor.setDirection(DcMotor.Direction.FORWARD);
-          intakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
-          conveyorBeltMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
+          intakeConveyorMotor = (DcMotor) getHardwareOn("intakeConveyorMotor", hardwareMap.dcMotor);
+          trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
 
     }
 
