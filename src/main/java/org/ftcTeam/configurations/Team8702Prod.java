@@ -1,6 +1,5 @@
 package org.ftcTeam.configurations;
 
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -21,7 +20,9 @@ public class Team8702Prod extends RobotConfiguration {
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
-    public DcMotor analogStick;
+    public DcMotor analogMotor;
+    public DcMotor intakeMotor;
+    public DcMotor conveyorBeltMotor;
 
 
     /**
@@ -50,12 +51,13 @@ public class Team8702Prod extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-//        motorR = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-//        motorL = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
-//        motorL.setDirection(DcMotor.Direction.REVERSE);
-//        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
-//        mrColor1.enableLed(true);
-        analogStick = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
+          motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
+          motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
+          motorL.setDirection(DcMotor.Direction.REVERSE);
+          analogMotor = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
+          analogMotor.setDirection(DcMotor.Direction.FORWARD);
+          intakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
+          conveyorBeltMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
 
     }
 
@@ -69,8 +71,6 @@ public class Team8702Prod extends RobotConfiguration {
         inches = inches/51.4;
     }
 
-    public DcMotor getAnalockStick() {
-        return analogStick;
-    }
+
 
 }

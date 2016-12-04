@@ -2,15 +2,10 @@ package org.ftcTeam.opmodes.registrar1;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.ftcTeam.configurations.FTCTeamRobot;
 import org.ftcTeam.configurations.Team8702Prod;
-import org.ftcTeam.configurations.Team8702Test;
-import org.ftcTeam.opmodes.ColorValue;
 import org.ftcbootstrap.ActiveOpMode;
-import org.ftcbootstrap.components.ColorSensorComponent;
 import org.ftcbootstrap.components.operations.motors.GamePadMotor;
 import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
-import org.ftcbootstrap.components.operations.servos.GamePadServo;
 
 
 /**
@@ -26,9 +21,9 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
     private Team8702Prod robot;
     private GamePadTankDrive gamePadTankDrive;
-
-    private GamePadMotor gamePadMotor;
-
+   private GamePadMotor analogGamePad;
+    private GamePadMotor intakeGamePad;
+    private GamePadMotor conveyorBeltGamePad;
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
      */
@@ -50,7 +45,9 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
         //create the operation  to perform a tank drive using the gamepad joysticks.
         gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-        gamePadMotor = new GamePadMotor(this, gamepad2, robot.getAnalockStick(), GamePadMotor.Control.LEFT_STICK_Y );
+        analogGamePad = new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
+        intakeGamePad = new GamePadMotor(this, gamepad2, robot.intakeMotor, GamePadMotor.Control.A_BUTTON);
+        conveyorBeltGamePad = new GamePadMotor(this, gamepad2, robot.conveyorBeltMotor, GamePadMotor.Control.A_BUTTON);
     }
 
     /**
@@ -63,18 +60,12 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     protected void activeLoop() throws InterruptedException {
 
         //update the motors with the gamepad joystick values
-        gamePadTankDrive.update();
-        gamePadMotor.update();
+       gamePadTankDrive.update();
+        analogGamePad.update();
+        intakeGamePad.update();
+        conveyorBeltGamePad.update();
 
-//        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
-//        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
-//        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
-//        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
-        //send any telemetry that may have been added in the above operations
         getTelemetryUtil().sendTelemetry();
 
     }
-
-
-
-    }
+}
