@@ -39,10 +39,10 @@ public class EncoderMotorOpMode extends ActiveOpMode {
 
         //specify configuration name save from scan operation
         robot = Team8702Prod.newConfig(hardwareMap, getTelemetryUtil());
-        motorToEncoderR = new MotorToEncoder(  this, robot.motorR);
-        motorToEncoderL = new MotorToEncoder( this, robot.motorL);
-        motorToEncoderR.setName("motor1");
-        motorToEncoderL.setName("motor2");
+        motorToEncoderR = new MotorToEncoder(this, robot.motorR);
+        motorToEncoderL = new MotorToEncoder(this, robot.motorL);
+        motorToEncoderR.setName("motorR");
+        motorToEncoderL.setName("motorL");
 
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
@@ -64,24 +64,29 @@ public class EncoderMotorOpMode extends ActiveOpMode {
     @Override
     protected void activeLoop() throws InterruptedException {
         getTelemetryUtil().addData("step: " + step , "current");
-
+       Thread.sleep(10000);
         boolean targetReached = false;
 
         switch (step) {
             case 1:
 
                 //full power , forward for 1000, 3ft in length
-               targetReached = motorToEncoderR.runToTarget(1, 20,
+               targetReached = motorToEncoderR.runToTarget(0.5, 2000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
 
-                targetReached = motorToEncoderL.runToTarget(1, 20,
+                targetReached = motorToEncoderL.runToTarget(0.5, 2000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                getTelemetryUtil().addData("R Current Position: ", motorToEncoderR.motorCurrentPosition());
+                getTelemetryUtil().addData("L Current Position: ", motorToEncoderL.motorCurrentPosition());
+                getTelemetryUtil().addData("Target Reached: ", targetReached);
                 if (targetReached) {
                     step = 99;
                 }
                 break;
 
             case 99:
+                motorToEncoderR.stop();
+                motorToEncoderL.stop();
                 getTelemetryUtil().addData("step" + step + " Opmode Status", "Robot Stopped.  Kill switch activated");
                 setOperationsCompleted();
                 break;
