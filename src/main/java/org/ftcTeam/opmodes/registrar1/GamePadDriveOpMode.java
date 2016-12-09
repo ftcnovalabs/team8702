@@ -1,11 +1,14 @@
 package org.ftcTeam.opmodes.registrar1;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.ftcTeam.configurations.Team8702Prod;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.GamePadMotor;
 import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
+import org.ftcbootstrap.components.operations.motors.GamePadMotorREVERSE;
+
 
 
 /**
@@ -21,9 +24,11 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
     private Team8702Prod robot;
     private GamePadTankDrive gamePadTankDrive;
-   private GamePadMotor analogGamePad;
-    private GamePadMotor intakeConveyorGamePad;
-    private GamePadMotor trebuchetGamePad;
+    //private GamePadMotor analogGamePad;
+    private GamePadMotor intakeGamePad;
+    private GamePadMotor intakeGamePadReverse;
+    //private GamePadMotor trebuchetGamePad;
+    //private GamePadMotor conveyorGamePad;
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
      */
@@ -43,11 +48,15 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     protected void onStart() throws InterruptedException {
         super.onStart();
 
-        //create the operation  to perform a tank drive using the gamepad joysticks.
+                      //create the operation  to perform a tank drive using the gamepad joysticks.
         gamePadTankDrive =    new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-        analogGamePad =       new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
-        intakeConveyorGamePad =       new GamePadMotor(this, gamepad2, robot.intakeConveyorMotor, GamePadMotor.Control.A_BUTTON);
-        trebuchetGamePad =    new GamePadMotor(this, gamepad2, robot.trebuchetMotor, GamePadMotor.Control.RIGHT_BUMPER);
+        //analogGamePad =       new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
+        //trebuchetGamePad =    new GamePadMotor(this, gamepad2, robot.trebuchetMotor, GamePadMotor.Control.RIGHT_BUMPER);
+        //conveyorGamePad = new GamePadMotor(this, gamepad2, robot.conveyorMotor, GamePadMotor.Control.A_BUTTON);
+        intakeGamePad =       new GamePadMotor(this, gamepad2, robot.IntakeMotor, GamePadMotor.Control.A_BUTTON);
+        intakeGamePadReverse = new GamePadMotor(this, gamepad2, robot.IntakeMotor, GamePadMotor.Control.B_BUTTON, -1.0F);
+
+
     }
 
     /**
@@ -61,9 +70,11 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
         //update the motors with the gamepad joystick values
        gamePadTankDrive.update();
-        analogGamePad.update();
-        intakeConveyorGamePad.update();
-        trebuchetGamePad.update();
+       // analogGamePad.update();
+        intakeGamePad.update();
+       // trebuchetGamePad.update();
+       // conveyorGamePad.update();
+        intakeGamePadReverse.update();
 
         getTelemetryUtil().sendTelemetry();
 

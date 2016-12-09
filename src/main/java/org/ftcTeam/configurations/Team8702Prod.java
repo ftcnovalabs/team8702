@@ -1,6 +1,7 @@
 package org.ftcTeam.configurations;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.ftcbootstrap.RobotConfiguration;
@@ -20,9 +21,10 @@ public class Team8702Prod extends RobotConfiguration {
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
-    public DcMotor analogMotor;
-    public DcMotor intakeConveyorMotor;
-    public DcMotor trebuchetMotor;
+   // public DcMotor analogMotor;
+    public DcMotor IntakeMotor;
+    //public DcMotor conveyorMotor;
+   // public DcMotor trebuchetMotor;
 
 
     /**
@@ -54,10 +56,11 @@ public class Team8702Prod extends RobotConfiguration {
           motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
           motorL.setDirection(DcMotor.Direction.REVERSE);
-          analogMotor = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
-          analogMotor.setDirection(DcMotor.Direction.FORWARD);
-          intakeConveyorMotor = (DcMotor) getHardwareOn("intakeConveyorMotor", hardwareMap.dcMotor);
-          trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
+         // analogMotor = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
+
+          IntakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
+          //conveyorMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
+          //trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
 
     }
 
