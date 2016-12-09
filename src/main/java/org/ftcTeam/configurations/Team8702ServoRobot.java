@@ -16,16 +16,8 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
  * saved configuration on the phone.
  */
 public class Team8702ServoRobot extends RobotConfiguration {
-    //51.4 = 1 inch
-    //motors
-    public DcMotor motorR;
-    public DcMotor motorL;
+
     public Servo servo1;
-    //declaration- name
-    //fill- code the attributes
-    //operate- to use the function
-
-
     /**
      * Factory method for this class
      *
@@ -50,36 +42,7 @@ public class Team8702ServoRobot extends RobotConfiguration {
     protected void init(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
 
         setTelemetry(telemetryUtil);
-
-        motorR = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-        motorL = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
         servo1 = (Servo) getHardwareOn("servo1", hardwareMap.servo);
-
-
     }
-
-
-    public void FORWARD (double inches)
-    {
-        inches = inches * 51.4;
-    }
-
-    public void BACKWARD (double inches)
-    {
-        inches = inches/51.4;
-    }
-
-    public void RIGHT (double degrees)
-    {
-    }
-
-    public void LEFT (double degrees)
-    {
-
-    }
-
-
-
-
 
 }

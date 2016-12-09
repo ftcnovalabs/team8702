@@ -1,5 +1,6 @@
-package org.ftcTeam.opmodes.registrar1;
+package org.ftcTeam.opmodes.registrar2;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.ftcTeam.configurations.Team8702ServoRobot;
@@ -15,11 +16,10 @@ import org.ftcbootstrap.components.operations.servos.GamePadServo;
  * See: {@link GamePadTankDrive}
  */
 
-@TeleOp
-public class GamePadDriveOpModeServoTest extends ActiveOpMode {
+@Autonomous
+public class GamePadServoTest extends ActiveOpMode {
 
     private Team8702ServoRobot robot;
-    private GamePadTankDrive gamePadTankDrive;
     private GamePadServo servo1;
 
     /**
@@ -31,7 +31,6 @@ public class GamePadDriveOpModeServoTest extends ActiveOpMode {
         super.onStart();
         double initialPosition = 0.0;
         servo1 = new GamePadServo(this, gamepad1, robot.servo1, GamePadServo.Control.Y_A, initialPosition);
-        gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
     }
 
     @Override
@@ -46,19 +45,11 @@ public class GamePadDriveOpModeServoTest extends ActiveOpMode {
 
     }
 
-    /**
-     * Implement this method to define the code to run when the Start button is pressed on the Driver station.
-     * This method will be called on each hardware cycle just as the loop() method is called for event based Opmodes
-     *
-     * @throws InterruptedException
-     */
     @Override
     protected void activeLoop() throws InterruptedException {
 
         //update the motors with the gamepad joystick values
         servo1.update();
-        gamePadTankDrive.update();
-
         //send any telemetry that may have been added in the above operations
         getTelemetryUtil().sendTelemetry();
 
