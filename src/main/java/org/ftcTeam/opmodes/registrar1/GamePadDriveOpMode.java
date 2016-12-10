@@ -8,7 +8,7 @@ import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.GamePadMotor;
 import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
 import org.ftcbootstrap.components.operations.motors.GamePadMotorREVERSE;
-
+import org.ftcbootstrap.components.operations.servos.GamePadServo;
 
 
 /**
@@ -26,7 +26,7 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     private GamePadTankDrive gamePadTankDrive;
     //private GamePadMotor analogGamePad;
     private GamePadMotor intakeGamePad;
-    private GamePadMotor intakeGamePadReverse;
+ //   private GamePadServo servoGamePad;
     //private GamePadMotor trebuchetGamePad;
     //private GamePadMotor conveyorGamePad;
     /**
@@ -53,9 +53,9 @@ public class GamePadDriveOpMode extends ActiveOpMode {
         //analogGamePad =       new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
         //trebuchetGamePad =    new GamePadMotor(this, gamepad2, robot.trebuchetMotor, GamePadMotor.Control.RIGHT_BUMPER);
         //conveyorGamePad = new GamePadMotor(this, gamepad2, robot.conveyorMotor, GamePadMotor.Control.A_BUTTON);
-        intakeGamePad =       new GamePadMotor(this, gamepad2, robot.IntakeMotor, GamePadMotor.Control.A_BUTTON);
-        intakeGamePadReverse = new GamePadMotor(this, gamepad2, robot.IntakeMotor, GamePadMotor.Control.B_BUTTON, -1.0F);
-
+        intakeGamePad =       new GamePadMotor(this, gamepad2, robot.IntakeMotor, GamePadMotor.Control.LEFT_STICK_Y);
+       // double initialPosition = 0.0;
+       // servoGamePad = new GamePadServo(this, gamepad2, robot.reachingServo, GamePadServo.Control.Y_A, initialPosition);
 
     }
 
@@ -74,7 +74,7 @@ public class GamePadDriveOpMode extends ActiveOpMode {
         intakeGamePad.update();
        // trebuchetGamePad.update();
        // conveyorGamePad.update();
-        intakeGamePadReverse.update();
+     //   servoGamePad.update();
 
         getTelemetryUtil().sendTelemetry();
 

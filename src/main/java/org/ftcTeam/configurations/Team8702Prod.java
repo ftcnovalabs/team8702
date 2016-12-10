@@ -25,6 +25,7 @@ public class Team8702Prod extends RobotConfiguration {
     public DcMotor IntakeMotor;
     //public DcMotor conveyorMotor;
    // public DcMotor trebuchetMotor;
+   public Servo reachingServo;
 
 
     /**
@@ -57,23 +58,12 @@ public class Team8702Prod extends RobotConfiguration {
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
           motorL.setDirection(DcMotor.Direction.REVERSE);
          // analogMotor = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
-
+        reachingServo = (Servo) getHardwareOn("reacherServo", hardwareMap.servo);
           IntakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
           //conveyorMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
           //trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
 
     }
-
-    public void FORWARD (double inches)
-    {
-        inches = inches * 51.4;
-    }
-
-    public void BACKWARD (double inches)
-    {
-        inches = inches/51.4;
-    }
-
 
 
 }
