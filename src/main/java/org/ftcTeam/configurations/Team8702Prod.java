@@ -1,9 +1,9 @@
 package org.ftcTeam.configurations;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.ftcbootstrap.RobotConfiguration;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
 
@@ -26,6 +26,7 @@ public class Team8702Prod extends RobotConfiguration {
     //public DcMotor conveyorMotor;
    // public DcMotor trebuchetMotor;
    public Servo reachingServo;
+    public ColorSensor mrColor1;
 
 
     /**
@@ -60,6 +61,7 @@ public class Team8702Prod extends RobotConfiguration {
          // analogMotor = (DcMotor) getHardwareOn("analogStick1", hardwareMap.dcMotor);
         reachingServo = (Servo) getHardwareOn("reacherServo", hardwareMap.servo);
           IntakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
+        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
           //conveyorMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
           //trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
 
