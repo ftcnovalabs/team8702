@@ -15,7 +15,10 @@ public class Registrar1 extends BootstrapRegistrar {
             GamePadDriveOpMode.class,
             TelemetryTest.class,
             EncoderMotorOpMode.class,
-            EncoderMotorOpModeWithColor.class
+            EncoderMotorOpModeWithColor.class,
+            AutoRED.class,
+            AutoBLUE.class
+
 
     };
 
