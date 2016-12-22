@@ -58,8 +58,6 @@ public class AutoBLUE extends ActiveOpMode {
 
 //        getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
 //        getTelemetryUtil().sendTelemetry();
-
-
     }
 
     @Override
@@ -78,9 +76,9 @@ public class AutoBLUE extends ActiveOpMode {
         getTelemetryUtil().addData("step: " + step, "current");
 
         //send any telemetry that may have been added in the above operations
-        if (rainbowValue != null) {
-            getTelemetryUtil().addData("Color", rainbowValue.toString());
-        }
+//        if (rainbowValue != null) {
+//            getTelemetryUtil().addData("Color", rainbowValue.toString());
+//        }
         switch(step){
             case 1:
                 rainbowValue = getColor();
@@ -90,11 +88,9 @@ public class AutoBLUE extends ActiveOpMode {
                 if (rainbowValue == ColorValue.BLUE) {
                     targetReached = motorToEncoderR.runToTarget(0.1, 350,
                             MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    getTelemetryUtil().addData("R Current Position 1: ", motorToEncoderR.motorCurrentPosition());
                 } else if(rainbowValue == ColorValue.RED ) {
                     targetReached = motorToEncoderL.runToTarget(0.1, 350,
                         MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    getTelemetryUtil().addData("L Current Position: ", motorToEncoderL.motorCurrentPosition());
                 } else{
                 //nada
                     step = 99;
@@ -102,19 +98,16 @@ public class AutoBLUE extends ActiveOpMode {
                 if(targetReached) {
                     step++;
                 }
-
                 break;
             case 3:
                 //backward
                 if (rainbowValue == ColorValue.BLUE) {
                     targetReached = motorToEncoderR.runToTarget(-0.1, 350,
                             MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    getTelemetryUtil().addData("R Current Position 1: ", motorToEncoderR.motorCurrentPosition());
                 } else if(rainbowValue == ColorValue.RED ) {
                     targetReached = motorToEncoderL.runToTarget(-0.1, 350,
                             MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    getTelemetryUtil().addData("L Current Position: ", motorToEncoderL.motorCurrentPosition());
-                } else{
+                } else {
                     //nada
                     step = 99;
                 }
@@ -129,31 +122,20 @@ public class AutoBLUE extends ActiveOpMode {
         }
         getTelemetryUtil().sendTelemetry();
 
-
     }
 
     public ColorValue getColor() {
         int red = colorSensorComponent.getR();
         int blue = colorSensorComponent.getB();
         int green = colorSensorComponent.getG();
-        getTelemetryUtil().addData("Blue ", blue);
-        getTelemetryUtil().addData("Red ", red);
-        getTelemetryUtil().addData("Zilch ", green);
-
-
 
         if (blue > red && blue > green) {
-            getTelemetryUtil().addData("Returning: ", "Blue");
-            getTelemetryUtil().sendTelemetry();
             return ColorValue.BLUE;
 
         } else if (red > blue && red > green) {
-            getTelemetryUtil().addData("Returning: ", "Red");
-            getTelemetryUtil().sendTelemetry();
             return ColorValue.RED;
+
         }
-        getTelemetryUtil().addData("Returning: ", "Zilch");
-        getTelemetryUtil().sendTelemetry();
         return ColorValue.ZILCH;
     }
 }
