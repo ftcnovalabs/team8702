@@ -47,8 +47,8 @@ public class AutoBLUE extends ActiveOpMode {
 
         //specify configuration name save from scan operation
         robot = Team8702Prod.newConfig(hardwareMap, getTelemetryUtil());
-        getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
-        getTelemetryUtil().sendTelemetry();
+//        getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
+//        getTelemetryUtil().sendTelemetry();
         colorSensorComponent = new ColorSensorComponent(this, robot.mrColor1, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
         colorSensorComponent.enableLed(false);
         motorToEncoderR = new MotorToEncoder(this, robot.motorR);
@@ -56,8 +56,8 @@ public class AutoBLUE extends ActiveOpMode {
         motorToEncoderR.setName("motorR");
         motorToEncoderL.setName("motorL");
 
-        getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
-        getTelemetryUtil().sendTelemetry();
+//        getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
+//        getTelemetryUtil().sendTelemetry();
 
 
     }
@@ -78,7 +78,6 @@ public class AutoBLUE extends ActiveOpMode {
         getTelemetryUtil().addData("step: " + step, "current");
 
         //send any telemetry that may have been added in the above operations
-        getTelemetryUtil().sendTelemetry();
         if (rainbowValue != null) {
             getTelemetryUtil().addData("Color", rainbowValue.toString());
         }
@@ -128,24 +127,33 @@ public class AutoBLUE extends ActiveOpMode {
                 break;
 
         }
+        getTelemetryUtil().sendTelemetry();
+
 
     }
-
 
     public ColorValue getColor() {
-        int Red = colorSensorComponent.getR();
-        int Blue = colorSensorComponent.getB();
-        int Green = colorSensorComponent.getG();
+        int red = colorSensorComponent.getR();
+        int blue = colorSensorComponent.getB();
+        int green = colorSensorComponent.getG();
+        getTelemetryUtil().addData("Blue ", blue);
+        getTelemetryUtil().addData("Red ", red);
+        getTelemetryUtil().addData("Zilch ", green);
 
-        if (colorSensorComponent.isBlue(Red, Blue, Green)) {
+
+
+        if (blue > red && blue > green) {
+            getTelemetryUtil().addData("Returning: ", "Blue");
+            getTelemetryUtil().sendTelemetry();
             return ColorValue.BLUE;
 
-        } else if (colorSensorComponent.isRed(Red, Blue, Green)) {
+        } else if (red > blue && red > green) {
+            getTelemetryUtil().addData("Returning: ", "Red");
+            getTelemetryUtil().sendTelemetry();
             return ColorValue.RED;
         }
+        getTelemetryUtil().addData("Returning: ", "Zilch");
+        getTelemetryUtil().sendTelemetry();
         return ColorValue.ZILCH;
-
     }
 }
-
-
