@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.ftcTeam.configurations.Team8702Prod;
+import org.ftcTeam.opmodes.ColorUtils;
 import org.ftcTeam.opmodes.ColorValue;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.ColorSensorComponent;
@@ -33,11 +34,15 @@ public class AutoRED extends ActiveOpMode {
     private MotorToEncoder motorToEncoderR;
     private MotorToEncoder motorToEncoderL;
     private int step;
+    private int majorStep;
     private GamePadTankDrive gamePadTankDrive;
     String blue = "blue";
     String red = "red";
     String green = "green";
     public ColorSensorComponent colorSensorComponent;
+    ColorValue rainbowValue;
+    boolean targetReached = false;
+
 
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
@@ -66,6 +71,8 @@ public class AutoRED extends ActiveOpMode {
     protected void onStart() throws InterruptedException  {
         super.onStart();
         step = 1;
+        majorStep = 1;
+
     }
 
     /**
@@ -84,52 +91,76 @@ public class AutoRED extends ActiveOpMode {
         getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
         //send any telemetry that may have been added in the above operations
         getTelemetryUtil().sendTelemetry();
-        getTelemetryUtil().addData("Color", getColor().toString());
+        getTelemetryUtil().addData("Color", ColorUtils.getColor(colorSensorComponent).toString());
+
+        switch(majorStep) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+        }
 
     }
 
 
-    public ColorValue getColor() {
-        int Red = colorSensorComponent.getR();
-        int Blue = colorSensorComponent.getB();
-        int Green = colorSensorComponent.getG();
-        getTelemetryUtil().addData("step: " + step , "current");
-        boolean targetReached = false;
 
+    public void BeaconHitter() throws InterruptedException {
+        switch(step){
+            case 1:
+                rainbowValue = ColorUtils.getColor(colorSensorComponent);
+                step++;
+                break;
+            case 2:
 
-        boolean redboolean = colorSensorComponent.isRed(Red, Blue, Green);
+                if (rainbowValue == ColorValue.BLUE) {
+                    targetReached = motorToEncoderR.runToTarget(0.1, 350,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                } else if(rainbowValue == ColorValue.RED ) {
+                    targetReached = motorToEncoderL.runToTarget(0.1, 350,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                } else{
+                    //nada
+                    step = 99;
+                }
+                if(targetReached) {
+                    step++;
+                }
+                break;
+            case 3:
+                //backward
+                if (rainbowValue == ColorValue.BLUE) {
+                    targetReached = motorToEncoderR.runToTarget(-0.1, 350,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                } else if(rainbowValue == ColorValue.RED ) {
+                    targetReached = motorToEncoderL.runToTarget(-0.1, 350,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                } else {
+                    //nada
+                    step = 99;
+                }
+                if(targetReached) {
+                    step = 99;
+                }
+                break;
+            case 99:
+                setOperationsCompleted();
+                break;
 
-        if (redboolean) {
-            try{
-                        targetReached = motorToEncoderL.runToTarget(0.1, 7,
-                    MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-            return ColorValue.RED;}
-            catch(InterruptedException e){
-
-            }
         }
-        boolean blueboolean = colorSensorComponent.isBlue(Red, Blue, Green);
-
-        if (blueboolean) {
-            try{
-            targetReached = motorToEncoderR.runToTarget(0.1, 7,
-                    MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-
-            return ColorValue.RED; }
-        catch(InterruptedException e){
-
-        }
-            return ColorValue.BLUE;
-
-        }
-        return ColorValue.ZILCH;
-        //send any telemetry that may have been added in the above operations
-
-
+        getTelemetryUtil().sendTelemetry();
 
     }
-
 
 }
+
+
 
 
