@@ -1,5 +1,6 @@
 package org.ftcTeam.opmodes;
 
+
 import org.ftcbootstrap.components.ColorSensorComponent;
 
 /**
@@ -7,6 +8,8 @@ import org.ftcbootstrap.components.ColorSensorComponent;
  */
 
 public class ColorUtils {
+
+
     public static ColorValue getColor(ColorSensorComponent colorSensorComponent) {
         int red = colorSensorComponent.getR();
         int blue = colorSensorComponent.getB();

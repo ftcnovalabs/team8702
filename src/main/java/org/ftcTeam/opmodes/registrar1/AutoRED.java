@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.ftcTeam.configurations.Team8702Prod;
+import org.ftcTeam.opmodes.BeaconHitter;
 import org.ftcTeam.opmodes.ColorUtils;
 import org.ftcTeam.opmodes.ColorValue;
 import org.ftcbootstrap.ActiveOpMode;
@@ -42,6 +43,8 @@ public class AutoRED extends ActiveOpMode {
     public ColorSensorComponent colorSensorComponent;
     ColorValue rainbowValue;
     boolean targetReached = false;
+    BeaconHitter firstBeacon;
+    BeaconHitter secondBeacon;
 
 
     /**
@@ -60,9 +63,11 @@ public class AutoRED extends ActiveOpMode {
         motorToEncoderL = new MotorToEncoder(this, robot.motorL);
         motorToEncoderR.setName("motorR");
         motorToEncoderL.setName("motorL");
-
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
+        firstBeacon = new BeaconHitter();
+        secondBeacon = new BeaconHitter();
+
 
 
     }
@@ -84,6 +89,7 @@ public class AutoRED extends ActiveOpMode {
     protected void activeLoop() throws InterruptedException {
         getTelemetryUtil().addData("step: " + step, "current");
         boolean targetReached = false;
+        boolean done = false;
 
         getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
         getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
@@ -94,68 +100,50 @@ public class AutoRED extends ActiveOpMode {
         getTelemetryUtil().addData("Color", ColorUtils.getColor(colorSensorComponent).toString());
 
         switch(majorStep) {
+
             case 1:
+                // move to first beacon part 1
+                majorStep ++;
                 break;
             case 2:
+                //move to first beacon part 2
+                majorStep ++;
                 break;
             case 3:
+                // hit first beacon
+                while(!done) {
+                    done = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL);
+                }
+                majorStep ++;
+
                 break;
             case 4:
+                //move to second beacon part1
+                majorStep ++;
                 break;
             case 5:
+                //move to second beacon part2
+                majorStep ++;
                 break;
             case 6:
+                //hit second beacon
+                while(!done) {
+                    done = secondBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL);
+                }
+                majorStep ++;
                 break;
-        }
-
-    }
-
-
-
-    public void BeaconHitter() throws InterruptedException {
-        switch(step){
-            case 1:
-                rainbowValue = ColorUtils.getColor(colorSensorComponent);
-                step++;
+            case 7:
+                //got station part
+                majorStep ++;
                 break;
-            case 2:
-
-                if (rainbowValue == ColorValue.BLUE) {
-                    targetReached = motorToEncoderR.runToTarget(0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else if(rainbowValue == ColorValue.RED ) {
-                    targetReached = motorToEncoderL.runToTarget(0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else{
-                    //nada
-                    step = 99;
-                }
-                if(targetReached) {
-                    step++;
-                }
-                break;
-            case 3:
-                //backward
-                if (rainbowValue == ColorValue.BLUE) {
-                    targetReached = motorToEncoderR.runToTarget(-0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else if(rainbowValue == ColorValue.RED ) {
-                    targetReached = motorToEncoderL.runToTarget(-0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else {
-                    //nada
-                    step = 99;
-                }
-                if(targetReached) {
-                    step = 99;
-                }
+            case 8:
+                //go to station part 2
+                majorStep ++;
                 break;
             case 99:
                 setOperationsCompleted();
                 break;
-
         }
-        getTelemetryUtil().sendTelemetry();
 
     }
 
