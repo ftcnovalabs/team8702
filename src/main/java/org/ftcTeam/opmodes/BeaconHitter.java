@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.ftcbootstrap.components.ColorSensorComponent;
 import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 import org.ftcbootstrap.components.utils.MotorDirection;
+import org.ftcbootstrap.components.utils.TelemetryUtil;
 
 /**
  * Created by tylerkim on 12/21/16.
@@ -14,44 +15,39 @@ public class BeaconHitter {
 
      int step = 1;
      ColorValue rainbowValue;
+    TelemetryUtil teleUtil;
+
+    ColorValue teamColor;
+
+    public BeaconHitter (TelemetryUtil tele, ColorValue tC) {
+        teleUtil = tele;
+        teamColor = tC;
 
 
-    public boolean beaconHitter(ColorSensorComponent colorSensorComponent, MotorToEncoder motorToEncoderR, MotorToEncoder motorToEncoderL) throws InterruptedException {
+    }
+
+    public boolean beaconHitter(ColorSensorComponent colorSensorComponent, MotorToEncoder motorToEncoderR, MotorToEncoder motorToEncoderL, ColorValue teamColor) throws InterruptedException {
         boolean targetReached = false;
+        teleUtil.addData("Current Beacon Hitter step: ", step);
 
         switch(step){
             case 1:
                 rainbowValue = ColorUtils.getColor(colorSensorComponent);
-                step++;
+                teleUtil.addData("Color: ", rainbowValue.toString());
+                step ++;
                 break;
             case 2:
+//move method
+                targetReached = moveForward(rainbowValue, teamColor, motorToEncoderR, motorToEncoderL);
 
-                if (rainbowValue == ColorValue.BLUE) {
-                    targetReached = motorToEncoderR.runToTarget(0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else if(rainbowValue == ColorValue.RED ) {
-                    targetReached = motorToEncoderL.runToTarget(0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else{
-                    //nada
-                    step = 99;
-                }
                 if(targetReached) {
                     step++;
                 }
                 break;
             case 3:
                 //backward
-                if (rainbowValue == ColorValue.BLUE) {
-                    targetReached = motorToEncoderR.runToTarget(-0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else if(rainbowValue == ColorValue.RED ) {
-                    targetReached = motorToEncoderL.runToTarget(-0.1, 350,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                } else {
-                    //nada
-                    step = 99;
-                }
+               targetReached = moveBackward(rainbowValue, teamColor, motorToEncoderR, motorToEncoderL);
+
                 if(targetReached) {
                     step = 99;
                 }
@@ -59,7 +55,36 @@ public class BeaconHitter {
             case 99:
                 return true;
         }
-        return true;
-
+        return false;
     }
+    private boolean moveForward(ColorValue color, ColorValue teamColor, MotorToEncoder motorToEncoderR, MotorToEncoder motorToEncoderL) throws InterruptedException {
+        boolean targetReached = false;
+        if (color == ColorValue.ZILCH) {
+            return true;
+        } else if (color == teamColor) {
+            // move right motor
+            targetReached = motorToEncoderR.runToTarget(0.1, 350,
+                    MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+
+        } else if (color != teamColor) {
+            targetReached = motorToEncoderL.runToTarget(0.1, 350,
+                    MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        return targetReached;
+    }
+
+        private boolean moveBackward(ColorValue color, ColorValue teamColor, MotorToEncoder motorToEncoderR, MotorToEncoder motorToEncoderL) throws InterruptedException {
+            boolean targetReached = false;
+            if (color == teamColor) {
+                targetReached = motorToEncoderR.runToTarget(-0.1, 350,
+                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+            } else if (color != teamColor) {
+                targetReached = motorToEncoderL.runToTarget(-0.1, 350,
+                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+            } else if (color == ColorValue.ZILCH) {
+                return true;
+            }
+            return targetReached;
+        }
+
 }

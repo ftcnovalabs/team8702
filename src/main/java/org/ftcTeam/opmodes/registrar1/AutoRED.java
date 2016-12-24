@@ -65,8 +65,8 @@ public class AutoRED extends ActiveOpMode {
         motorToEncoderL.setName("motorL");
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
-        firstBeacon = new BeaconHitter();
-        secondBeacon = new BeaconHitter();
+        firstBeacon = new BeaconHitter(getTelemetryUtil(), rainbowValue);
+        secondBeacon = new BeaconHitter(getTelemetryUtil(), rainbowValue);
 
 
 
@@ -87,17 +87,11 @@ public class AutoRED extends ActiveOpMode {
      */
     @Override
     protected void activeLoop() throws InterruptedException {
-        getTelemetryUtil().addData("step: " + step, "current");
+        getTelemetryUtil().addData("Current Major Step: ", majorStep);
         boolean targetReached = false;
         boolean done = false;
 
-        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
-        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
-        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
-        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
         //send any telemetry that may have been added in the above operations
-        getTelemetryUtil().sendTelemetry();
-        getTelemetryUtil().addData("Color", ColorUtils.getColor(colorSensorComponent).toString());
 
         switch(majorStep) {
 
@@ -112,7 +106,7 @@ public class AutoRED extends ActiveOpMode {
             case 3:
                 // hit first beacon
                 while(!done) {
-                    done = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL);
+                    done = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
                 }
                 majorStep ++;
 
@@ -128,7 +122,7 @@ public class AutoRED extends ActiveOpMode {
             case 6:
                 //hit second beacon
                 while(!done) {
-                    done = secondBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL);
+                    done = secondBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
                 }
                 majorStep ++;
                 break;
@@ -138,13 +132,13 @@ public class AutoRED extends ActiveOpMode {
                 break;
             case 8:
                 //go to station part 2
-                majorStep ++;
+                majorStep = 99;
                 break;
             case 99:
                 setOperationsCompleted();
                 break;
         }
-
+        getTelemetryUtil().sendTelemetry();
     }
 
 }
