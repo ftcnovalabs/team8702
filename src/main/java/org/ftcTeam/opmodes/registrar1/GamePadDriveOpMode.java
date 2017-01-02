@@ -1,6 +1,7 @@
 package org.ftcTeam.opmodes.registrar1;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.ftcTeam.configurations.Team8702Prod;
@@ -24,9 +25,11 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
     private Team8702Prod robot;
     private GamePadTankDrive gamePadTankDrive;
-    //private GamePadMotor analogGamePad;
+    private GamePadMotor liftGamePad;
     private GamePadMotor intakeGamePad;
     private GamePadServo servoGamePad;
+    private GamePadMotor clawGamePad;
+
     //private GamePadMotor trebuchetGamePad;
     //private GamePadMotor conveyorGamePad;
     /**
@@ -49,8 +52,9 @@ public class GamePadDriveOpMode extends ActiveOpMode {
         super.onStart();
 
                       //create the operation  to perform a tank drive using the gamepad joysticks.
-        gamePadTankDrive =    new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-        //analogGamePad =       new GamePadMotor(this, gamepad2, robot.analogMotor, GamePadMotor.Control.RIGHT_STICK_Y);
+        gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
+        liftGamePad = new GamePadMotor(this, gamepad2, robot.liftMotor, GamePadMotor.Control.RIGHT_STICK_Y);
+        clawGamePad = new GamePadMotor(this, gamepad2, robot.clawMotor, GamePadMotor.Control.LEFT_STICK_X);
         //trebuchetGamePad =    new GamePadMotor(this, gamepad2, robot.trebuchetMotor, GamePadMotor.Control.RIGHT_BUMPER);
         //conveyorGamePad = new GamePadMotor(this, gamepad2, robot.conveyorMotor, GamePadMotor.Control.A_BUTTON);
         intakeGamePad =       new GamePadMotor(this, gamepad2, robot.IntakeMotor, GamePadMotor.Control.LEFT_STICK_Y);
@@ -70,11 +74,12 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
         //update the motors with the gamepad joystick values
        gamePadTankDrive.update();
-       // analogGamePad.update();
+        liftGamePad.update();
         intakeGamePad.update();
        // trebuchetGamePad.update();
        // conveyorGamePad.update();
         servoGamePad.update();
+        clawGamePad.update();
 
         getTelemetryUtil().sendTelemetry();
 

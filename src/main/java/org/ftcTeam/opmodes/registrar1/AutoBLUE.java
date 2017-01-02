@@ -8,9 +8,7 @@ import org.ftcTeam.opmodes.BeaconHitter;
 import org.ftcTeam.opmodes.ColorValue;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.ColorSensorComponent;
-import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
 import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
-import org.ftcbootstrap.components.utils.MotorDirection;
 
 
 /**
@@ -92,7 +90,8 @@ public class AutoBLUE extends ActiveOpMode {
         switch(majorStep) {
 
             case 1:
-                // move to first beacon part 1
+                // move to first beacon
+
                 majorStep ++;
                 break;
             case 2:
