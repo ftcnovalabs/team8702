@@ -2,6 +2,7 @@ package org.ftcTeam.opmodes.registrar1;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.vuforia.CameraDevice;
 
 import org.ftcTeam.configurations.Team8702Prod;
 import org.ftcTeam.opmodes.BeaconHitter;
@@ -97,40 +98,69 @@ public class AutoRED extends ActiveOpMode {
 
             case 1:
                 // move to first beacon part 1
-                majorStep ++;
+                targetReached = motorToEncoderR.runToTarget(0.25, 500,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                targetReached = motorToEncoderL.runToTarget(0.25, 500,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                if(targetReached) {
+                    majorStep++;
+                }
                 break;
             case 2:
                 //move to first beacon part 2
-                majorStep ++;
+                getTelemetryUtil().addData("Current Major Step: ", majorStep);
+                targetReached = motorToEncoderL.runToTarget(0.25, 200,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                if(targetReached){
+                    majorStep ++;
+                }
                 break;
             case 3:
-                // hit first beacon
+                //move to first beacon part 3
+                getTelemetryUtil().addData("Current Major Step: ", majorStep);
+                targetReached = motorToEncoderR.runToTarget(0.25, 1000,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                targetReached = motorToEncoderL.runToTarget(0.25, 1000,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                if (targetReached) {
+                    majorStep++;
+                }
+                break;
+            case 4:
+                //hit first beacon
                 while(!done) {
                     done = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
                 }
+               if (targetReached) {
+                   majorStep++;
+               }
+                break;
+            case 5:
+                // hit first beacon
+
                 majorStep ++;
 
                 break;
-            case 4:
+            case 6:
                 //move to second beacon part1
                 majorStep ++;
                 break;
-            case 5:
+            case 7:
                 //move to second beacon part2
                 majorStep ++;
                 break;
-            case 6:
+            case 8:
                 //hit second beacon
                 while(!done) {
                     done = secondBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
                 }
                 majorStep ++;
                 break;
-            case 7:
+            case 9:
                 //got station part
                 majorStep ++;
                 break;
-            case 8:
+            case 10:
                 //go to station part 2
                 majorStep = 99;
                 break;

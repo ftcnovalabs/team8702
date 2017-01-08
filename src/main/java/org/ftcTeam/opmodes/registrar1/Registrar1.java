@@ -17,9 +17,8 @@ public class Registrar1 extends BootstrapRegistrar {
             EncoderMotorOpMode.class,
             EncoderMotorOpModeWithColor.class,
             AutoRED.class,
-            AutoBLUE.class
-
-
+            AutoBLUE.class,
+            AutoRedLauren.class
     };
 
     return classes;
