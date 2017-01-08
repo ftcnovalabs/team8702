@@ -33,8 +33,7 @@ public class AutoRedLauren extends ActiveOpMode {
 
     BeaconHitter firstBeacon;
     BeaconHitter secondBeacon;
-
-
+    boolean targetReached = false;
 
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
@@ -74,24 +73,33 @@ public class AutoRedLauren extends ActiveOpMode {
     @Override
     protected void activeLoop() throws InterruptedException {
         getTelemetryUtil().addData("Current Major Step: ", majorStep);
-        boolean targetReached = false;
+
 
         //send any telemetry that may have been added in the above operations
         switch(majorStep) {
 
             case 1:
+                targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 // Go straight towards the beacon
-                motorToEncoderR.runToTarget(0.25, 2000,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(0.25, 2000,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    Thread.sleep(500);
-                    majorStep++;
+
+                while(!targetReached) {
+                    getTelemetryUtil().addData("Running: ", "Running1: ");
+
+                    motorToEncoderR.runToTarget(0.25, 2000,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, 2000,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                getTelemetryUtil().addData("Running: ", "Running99: ");
+
+                // Thread.sleep(2000);
+                    //majorStep++
+                    majorStep++;
+
                 break;
             case 2:
+                targetReached = false;
                 //Turn left towards the beacon
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 targetReached = motorToEncoderR.runToTarget(0.1, 800,
@@ -176,7 +184,9 @@ public class AutoRedLauren extends ActiveOpMode {
                 majorStep = 99;
                 break;
             case 99:
-                setOperationsCompleted();
+                getTelemetryUtil().addData("Running: ", "99: ");
+                robot.motorR.setPower(0);
+                robot.motorL.setPower(0);
                 break;
         }
         getTelemetryUtil().sendTelemetry();

@@ -12,12 +12,6 @@ public class Registrar1 extends BootstrapRegistrar {
 
   protected Class[] getOpmodeClasses() {
     Class[] classes = {
-            GamePadDriveOpMode.class,
-            TelemetryTest.class,
-            EncoderMotorOpMode.class,
-            EncoderMotorOpModeWithColor.class,
-            AutoRED.class,
-            AutoBLUE.class,
             AutoRedLauren.class
     };
 
