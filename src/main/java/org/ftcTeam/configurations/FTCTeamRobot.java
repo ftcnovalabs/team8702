@@ -1,5 +1,6 @@
 package org.ftcTeam.configurations;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -25,6 +26,11 @@ public class FTCTeamRobot extends RobotConfiguration {
     public DcMotor motor1;
     public DcMotor motor2;
     public Servo servo;
+
+    public ColorSensor mrColor1;
+
+
+
 
     /**
      * Factory method for this class

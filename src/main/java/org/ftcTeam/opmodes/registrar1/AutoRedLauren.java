@@ -97,20 +97,25 @@ public class AutoRedLauren extends ActiveOpMode {
             case 1:
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 // Go straight towards the beacon
-                targetReached = motorToEncoderR.runToTarget(0.25, 500,
+                targetReached = motorToEncoderR.runToTarget(0.25, 2500,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(0.25, 500,
+                targetReached = motorToEncoderL.runToTarget(0.25, 2500,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
+                    sleep(500);
                     majorStep++;
                 }
                 break;
             case 2:
                 //Turn left towards the beacon
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
-                targetReached = motorToEncoderL.runToTarget(0.25, 200,
+                targetReached = motorToEncoderR.runToTarget(0.25, 1,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                getTelemetryUtil().addData("Current Encoder Position" , motorToEncoderR.motorCurrentPosition());
+
                 if(targetReached){
+                    getTelemetryUtil().sendTelemetry();
+
                     majorStep ++;
                 }
                 break;
@@ -122,7 +127,8 @@ public class AutoRedLauren extends ActiveOpMode {
                 targetReached = motorToEncoderL.runToTarget(0.25, 1000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
-                   majorStep++;
+                   //majorStep++;
+                    majorStep = 99;
                 }
                 break;
             case 4:
@@ -185,18 +191,9 @@ public class AutoRedLauren extends ActiveOpMode {
                 majorStep = 99;
                 break;
             case 99:
-                //setOperationsCompleted();
-                targetReached = motorToEncoderL.runToTarget(0.25, 5,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderR.runToTarget(0.25, 5,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    majorStep++;
-                }
-
+                setOperationsCompleted();
                 break;
         }
         getTelemetryUtil().sendTelemetry();
     }
-
 }

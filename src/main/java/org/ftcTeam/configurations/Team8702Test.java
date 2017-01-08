@@ -79,8 +79,8 @@ public class Team8702Test extends RobotConfiguration {
         motorR = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
         motorL = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
         motorL.setDirection(DcMotor.Direction.REVERSE);
-        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
-        mrColor1.enableLed(true);
+     //   mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
+      //  mrColor1.enableLed(true);
 
 
 
