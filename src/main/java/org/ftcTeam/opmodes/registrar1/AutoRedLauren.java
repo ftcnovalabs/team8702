@@ -109,7 +109,9 @@ public class AutoRedLauren extends ActiveOpMode {
             case 2:
                 //Turn left towards the beacon
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
-                targetReached = motorToEncoderL.runToTarget(0.25, 1,
+                targetReached = motorToEncoderR.runToTarget(0.25, 500,
+                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                targetReached = motorToEncoderL.runToTarget(0.0, 0,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 getTelemetryUtil().addData("Current Encoder Position" , motorToEncoderR.motorCurrentPosition());
 
@@ -151,7 +153,7 @@ public class AutoRedLauren extends ActiveOpMode {
                 }
                 break;
             case 6:
-                targetReached = motorToEncoderR.runToTarget(0.25, 600,
+                targetReached = motorToEncoderL.runToTarget(0.25, 600,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if(targetReached){
                     majorStep ++;
@@ -167,7 +169,7 @@ public class AutoRedLauren extends ActiveOpMode {
                 }
                 break;
             case 8:
-                targetReached = motorToEncoderL.runToTarget(0.25,800,
+                targetReached = motorToEncoderR.runToTarget(0.25,800,
                     MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 if (targetReached) {
                     majorStep++;
