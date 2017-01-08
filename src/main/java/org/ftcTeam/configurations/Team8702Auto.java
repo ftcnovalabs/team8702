@@ -2,8 +2,9 @@ package org.ftcTeam.configurations;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import org.ftcbootstrap.RobotConfiguration;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
 
@@ -21,12 +22,6 @@ public class Team8702Auto extends RobotConfiguration {
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
-    public DcMotor liftMotor;
-    public DcMotor IntakeMotor;
-    public DcMotor clawMotor;
-    //public DcMotor conveyorMotor;
-   // public DcMotor trebuchetMotor;
-   public Servo reachingServo;
     public ColorSensor mrColor1;
 
 
@@ -59,15 +54,6 @@ public class Team8702Auto extends RobotConfiguration {
           motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
           motorL.setDirection(DcMotor.Direction.REVERSE);
-          liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
-          clawMotor = (DcMotor) getHardwareOn("clawMotor", hardwareMap.dcMotor);
-//        reachingServo = (Servo) getHardwareOn("reacherServo", hardwareMap.servo);
-//          IntakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
         mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
-          //conveyorMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
-          //trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
-
     }
-
-
 }
