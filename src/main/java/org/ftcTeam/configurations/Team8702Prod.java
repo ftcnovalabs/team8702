@@ -22,11 +22,8 @@ public class Team8702Prod extends RobotConfiguration {
     public DcMotor motorR;
     public DcMotor motorL;
     public DcMotor liftMotor;
-    public DcMotor IntakeMotor;
-    public DcMotor clawMotor;
-    //public DcMotor conveyorMotor;
-   // public DcMotor trebuchetMotor;
-   public Servo reachingServo;
+    public DcMotor clawMotorR;
+    public DcMotor clawMotorL;
     public ColorSensor mrColor1;
 
 
@@ -60,12 +57,9 @@ public class Team8702Prod extends RobotConfiguration {
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
           motorL.setDirection(DcMotor.Direction.REVERSE);
           liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
-          clawMotor = (DcMotor) getHardwareOn("clawMotor", hardwareMap.dcMotor);
-//        reachingServo = (Servo) getHardwareOn("reacherServo", hardwareMap.servo);
-//          IntakeMotor = (DcMotor) getHardwareOn("intakeMotor", hardwareMap.dcMotor);
-        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
-          //conveyorMotor = (DcMotor) getHardwareOn("conveyorMotor", hardwareMap.dcMotor);
-          //trebuchetMotor = (DcMotor) getHardwareOn("catapultMotor" , hardwareMap.dcMotor);
+          clawMotorR = (DcMotor) getHardwareOn("clawMotorR", hardwareMap.dcMotor);
+        clawMotorL = (DcMotor) getHardwareOn("clawMotorL", hardwareMap.dcMotor);
+       mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
 
     }
 
