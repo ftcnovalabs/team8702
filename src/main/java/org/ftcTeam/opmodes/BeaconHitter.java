@@ -64,11 +64,11 @@ public class BeaconHitter {
             return true;
         } else if (color == teamColor) {
             // move right motor
-            targetReached = motorToEncoderR.runToTarget(0.1, 350,
+            targetReached = motorToEncoderL.runToTarget(0.1, 350,
                     MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
 
         } else if (color != teamColor) {
-            targetReached = motorToEncoderL.runToTarget(0.1, 350,
+            targetReached = motorToEncoderR.runToTarget(0.1, 350,
                     MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
         }
         return targetReached;
@@ -77,10 +77,10 @@ public class BeaconHitter {
     private boolean moveBackward(ColorValue color, ColorValue teamColor, MotorToEncoder motorToEncoderR, MotorToEncoder motorToEncoderL) throws InterruptedException {
         boolean targetReached = false;
         if (color == teamColor) {
-            targetReached = motorToEncoderR.runToTarget(-0.1, 350,
+            targetReached = motorToEncoderL.runToTarget(-0.1, 350,
                     MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
         } else if (color != teamColor) {
-            targetReached = motorToEncoderL.runToTarget(-0.1, 350,
+            targetReached = motorToEncoderR.runToTarget(-0.1, 350,
                     MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
         } else if (color == ColorValue.ZILCH) {
             return true;
