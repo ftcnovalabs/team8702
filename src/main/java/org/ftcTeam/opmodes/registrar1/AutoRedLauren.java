@@ -3,8 +3,10 @@ package org.ftcTeam.opmodes.registrar1;
         import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
         import com.qualcomm.robotcore.hardware.DcMotor;
         import org.ftcTeam.configurations.Team8702Auto;
+        import org.ftcTeam.opmodes.AutoStepEncoder;
         import org.ftcTeam.opmodes.BeaconHitter;
         import org.ftcTeam.opmodes.ColorValue;
+        import org.ftcTeam.opmodes.RobotAutonomousUtils;
         import org.ftcbootstrap.ActiveOpMode;
         import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
         import org.ftcbootstrap.components.utils.MotorDirection;
@@ -78,61 +80,54 @@ public class AutoRedLauren extends ActiveOpMode {
         //send any telemetry that may have been added in the above operations
         switch(majorStep) {
 
-            case 1:
+            case 1: // Go straight towards the beacon
                 targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
-                // Go straight towards the beacon
 
                 while(!targetReached) {
                     getTelemetryUtil().addData("Running: ", "Running1: ");
 
-                    motorToEncoderR.runToTarget(0.25, 2000,
+                    motorToEncoderR.runToTarget(0.25, AutoStepEncoder.FIRST_BEACON_APPROACH_VALUE,
                             MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderL.runToTarget(0.25, 2000,
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.FIRST_BEACON_APPROACH_VALUE,
                             MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
-                getTelemetryUtil().addData("Running: ", "Running99: ");
-
-                // Thread.sleep(2000);
-                    //majorStep++
-                    majorStep++;
+                //getTelemetryUtil().addData("Running: ", "Running99: ");
+                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                majorStep++;
 
                 break;
-            case 2:
+            case 2: //Turn left towards the beacon
                 targetReached = false;
-                //Turn left towards the beacon
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
-                targetReached = motorToEncoderR.runToTarget(0.1, 800,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                while(!targetReached) {
+                    targetReached = motorToEncoderR.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                }
                 getTelemetryUtil().addData("Current Encoder Position" , motorToEncoderR.motorCurrentPosition());
-
-                if(targetReached){
-                    getTelemetryUtil().sendTelemetry();
-                    robot.motorL.setPower(0);
-                    robot.motorR.setPower(0);
-
-                    majorStep++;
-                }
+                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                getTelemetryUtil().sendTelemetry();
+                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                majorStep++;
                 break;
-            case 3:
-                //Go straight to in front of the beacon
+            case 3: //Go straight to in front of the beacon
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
-                targetReached = motorToEncoderR.runToTarget(0.25, 2970,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(0.25, 2970,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                   //majorStep++;
-                    majorStep = 99;
+                while(!targetReached) {
+                    motorToEncoderR.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                majorStep++;
                 break;
-            case 4:
-                // hit first beacon
+            case 4: // hit first beacon
                /*
                while(!done) {
                     done = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
                 }
                 */
+                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
                 majorStep ++;
                 break;
             case 5:

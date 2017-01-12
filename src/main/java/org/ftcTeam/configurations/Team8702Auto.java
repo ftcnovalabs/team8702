@@ -22,7 +22,7 @@ public class Team8702Auto extends RobotConfiguration {
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
-    public ColorSensor mrColor1;
+    //public ColorSensor mrColor1;
 
 
     /**
@@ -54,6 +54,6 @@ public class Team8702Auto extends RobotConfiguration {
           motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
           motorL.setDirection(DcMotor.Direction.REVERSE);
-        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
+       // mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
     }
 }
