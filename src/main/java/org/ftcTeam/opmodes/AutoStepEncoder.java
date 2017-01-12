@@ -6,8 +6,8 @@ package org.ftcTeam.opmodes;
 
 public class AutoStepEncoder {
 
-    public static int FIRST_BEACON_APPROACH_VALUE  = 2000;
-    public static int SECOND_BEACON_APPROACH_VALUE = 2000;
+    public static int BEACON_APPROACH_VALUE_PART_1  = 2000;
+    public static int TRANSITION_BEACON_APPROACH_VALUE = 2000;
     public static int NINTY_ANGLE_TURN_VALUE = 800;
     public static int APPROACH_BEACON_VALUE = 1000;
 

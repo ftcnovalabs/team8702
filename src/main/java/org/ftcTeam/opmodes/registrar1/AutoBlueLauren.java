@@ -24,7 +24,7 @@ package org.ftcTeam.opmodes.registrar1;
  */
 
 @Autonomous
-public class AutoRedLauren extends ActiveOpMode {
+public class AutoBlueLauren extends ActiveOpMode {
 
     private Team8702Auto robot;
 
@@ -87,13 +87,13 @@ public class AutoRedLauren extends ActiveOpMode {
                 while(!targetReached) {
                     getTelemetryUtil().addData("Running: ", "Running1: ");
 
-                    motorToEncoderR.runToTarget(0.25, AutoStepEncoder.FIRST_BEACON_APPROACH_VALUE,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.FIRST_BEACON_APPROACH_VALUE,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    motorToEncoderR.runToTarget(0.25, AutoStepEncoder.BEACON_APPROACH_VALUE_PART_1,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.BEACON_APPROACH_VALUE_PART_1,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 //getTelemetryUtil().addData("Running: ", "Running99: ");
-                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;
 
                 break;
@@ -102,15 +102,16 @@ public class AutoRedLauren extends ActiveOpMode {
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 while(!targetReached) {
                     targetReached = motorToEncoderR.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
-                getTelemetryUtil().addData("Current Encoder Position" , motorToEncoderR.motorCurrentPosition());
-                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
-                getTelemetryUtil().sendTelemetry();
-                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
-                majorStep++;
+                   RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                    getTelemetryUtil().addData("Current Encoder Position", motorToEncoderR.motorCurrentPosition());
+                    getTelemetryUtil().sendTelemetry();
+                    majorStep++;
+
                 break;
             case 3: //Go straight to in front of the beacon
+                targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 while(!targetReached) {
                     motorToEncoderR.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
@@ -118,59 +119,74 @@ public class AutoRedLauren extends ActiveOpMode {
                     targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
                             MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
-                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;
                 break;
             case 4: // hit first beacon
-               /*
-               while(!done) {
-                    done = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
-                }
-                */
-                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
-                majorStep ++;
+//                targetReached = false;
+//               while(!targetReached) {
+//                   targetReached = firstBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.BLUE);
+//                }
+//
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                majorStep++;
                 break;
             case 5:
-                //Press the beacon
-                targetReached = motorToEncoderR.runToTarget(0.25,300,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(0.25, 300,
-                        MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    majorStep++;
+                //Backitup
+                targetReached = false;
+                while(!targetReached) {
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                majorStep++;
+
                 break;
             case 6:
-                targetReached = motorToEncoderL.runToTarget(0.25, 600,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if(targetReached){
-                    majorStep ++;
+                //turn to second beecon
+                targetReached = false;
+                while(!targetReached) {
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                majorStep ++;
                 break;
             case 7:
-                targetReached = motorToEncoderR.runToTarget(0.25, 750,
-                    MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(0.25, 750,
-                    MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    majorStep++;
+                //go to it
+                targetReached = false;
+                while(!targetReached) {
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.TRANSITION_BEACON_APPROACH_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.TRANSITION_BEACON_APPROACH_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                majorStep++;
                 break;
             case 8:
-                targetReached = motorToEncoderR.runToTarget(0.25,800,
-                    MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    majorStep++;
+                //turn to it
+                targetReached = false;
+                while (!targetReached) {
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                majorStep++;
                 break;
             case 9:
-                targetReached = motorToEncoderR.runToTarget(0.25, 500,
-                    MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                targetReached = motorToEncoderL.runToTarget(0.25, 500,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    majorStep++;
+                // go to it
+                targetReached = false;
+                while (!targetReached) {
+                    targetReached = motorToEncoderR.runToTarget(0.25, 500,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, 500,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
+                RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
+                majorStep++;
                 break;
             case 10:
                 /**
