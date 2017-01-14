@@ -9,7 +9,7 @@ import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.GamePadMotor;
 import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
 import org.ftcbootstrap.components.operations.servos.GamePadServo;
-
+import org.ftcbootstrap.components.utils.MotorDirection;
 
 
 /**
@@ -27,6 +27,7 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     private GamePadTankDrive gamePadTankDrive;
     private GamePadMotor liftGamePad;
     private GamePadTankDrive clawGamePad;
+
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
      */
@@ -48,10 +49,8 @@ public class GamePadDriveOpMode extends ActiveOpMode {
 
                       //create the operation  to perform a tank drive using the gamepad joysticks.
         gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-        clawGamePad = new GamePadTankDrive(this, gamepad2, robot.clawMotorR, robot.clawMotorL);
-        liftGamePad = new GamePadMotor(this, gamepad2, robot.liftMotor, GamePadMotor.Control.RIGHT_STICK_X);
-
-
+       clawGamePad = new GamePadTankDrive(this, gamepad2, robot.clawMotorR, robot.clawMotorL);
+        liftGamePad = new GamePadMotor(this, gamepad2, robot.liftMotor, GamePadMotor.Control.UP_DOWN_BUTTONS);
     }
 
     /**
@@ -67,7 +66,6 @@ public class GamePadDriveOpMode extends ActiveOpMode {
        gamePadTankDrive.update();
         liftGamePad.update();
         clawGamePad.update();
-
         getTelemetryUtil().sendTelemetry();
 
     }

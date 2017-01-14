@@ -2,6 +2,7 @@ package org.ftcTeam.configurations;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.ftcbootstrap.RobotConfiguration;
@@ -25,6 +26,7 @@ public class Team8702Prod extends RobotConfiguration {
     public DcMotor clawMotorR;
     public DcMotor clawMotorL;
     public ColorSensor mrColor1;
+    public DcMotor liftMotorBack;
 
 
     /**
@@ -55,7 +57,6 @@ public class Team8702Prod extends RobotConfiguration {
 
           motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
-          motorL.setDirection(DcMotor.Direction.REVERSE);
           liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
           clawMotorR = (DcMotor) getHardwareOn("clawMotorR", hardwareMap.dcMotor);
         clawMotorL = (DcMotor) getHardwareOn("clawMotorL", hardwareMap.dcMotor);
