@@ -101,7 +101,7 @@ public class AutoBlueLauren extends ActiveOpMode {
                 targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 while(!targetReached) {
-                    targetReached = motorToEncoderR.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                    targetReached = motorToEncoderL.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
                             MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                    RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
@@ -148,8 +148,8 @@ public class AutoBlueLauren extends ActiveOpMode {
                 //turn to second beecon
                 targetReached = false;
                 while(!targetReached) {
-                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep ++;
@@ -170,7 +170,7 @@ public class AutoBlueLauren extends ActiveOpMode {
                 //turn to it
                 targetReached = false;
                 while (!targetReached) {
-                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                    targetReached = motorToEncoderR.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
                             MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
