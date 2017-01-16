@@ -3,6 +3,7 @@ package org.ftcTeam.configurations;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.ftcbootstrap.RobotConfiguration;
@@ -22,6 +23,7 @@ public class Team8702Auto extends RobotConfiguration {
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
+    public OpticalDistanceSensor ods;
     //public ColorSensor mrColor1;
 
 
@@ -51,9 +53,11 @@ public class Team8702Auto extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-          motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
-          motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
-          motorL.setDirection(DcMotor.Direction.REVERSE);
+        motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
+        motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
+        motorL.setDirection(DcMotor.Direction.REVERSE);
+
+        ods = (OpticalDistanceSensor) getHardwareOn("sensor_ods", hardwareMap.opticalDistanceSensor);
        // mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
     }
 }
