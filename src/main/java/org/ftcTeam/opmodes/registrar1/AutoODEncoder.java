@@ -80,18 +80,13 @@ public class AutoODEncoder extends ActiveOpMode {
         switch(majorStep) {
 
             case 1: // Go straight towards the beacon
-                targetReached = false;
                 boolean reachedDestination = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 // Need to change the motors to run without encoder to use OD
                 robot.motorL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.motorR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                while(!reachedDestination && !targetReached) {
-
+                while(!reachedDestination) {
                     reachedDestination =  tankDriveToODS.runToTarget(0.2, 0.5, DriveDirection.DRIVE_FORWARD);
-
-                    //targetReached  = tankDriveToEncoder.runToTarget(0.2, 2000 ,
-                    //        DriveDirection.DRIVE_FORWARD,DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 if( reachedDestination) {
                     majorStep++;
