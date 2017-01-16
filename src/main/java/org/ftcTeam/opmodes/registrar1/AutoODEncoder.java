@@ -83,18 +83,21 @@ public class AutoODEncoder extends ActiveOpMode {
                 targetReached = false;
                 boolean reachedDestination = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
-
-               // while(!reachedDestination && !targetReached) {
+                // Need to change the motors to run without encoder to use OD
+                robot.motorL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                robot.motorR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                while(!reachedDestination && !targetReached) {
 
                     reachedDestination =  tankDriveToODS.runToTarget(0.2, 0.5, DriveDirection.DRIVE_FORWARD);
-                    targetReached  = tankDriveToEncoder.runToTarget(0.2, 2000 ,
-                            DriveDirection.DRIVE_FORWARD,DcMotor.RunMode.RUN_TO_POSITION);
-                //}
-                if( reachedDestination || targetReached) {
+
+                    //targetReached  = tankDriveToEncoder.runToTarget(0.2, 2000 ,
+                    //        DriveDirection.DRIVE_FORWARD,DcMotor.RunMode.RUN_USING_ENCODER);
+                }
+                if( reachedDestination) {
                     majorStep++;
                     getTelemetryUtil().addData("Current Major Step: ", majorStep);
                     getTelemetryUtil().sendTelemetry();
-                    //RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                    RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
                 }
                 break;
             case 2: //Turn left towards the beacon
@@ -125,44 +128,7 @@ public class AutoODEncoder extends ActiveOpMode {
                 //majorStep++;
                 majorStep = 99;
                 break;
-            case 4: // hit first beacon
 
-                majorStep++;
-                break;
-            case 5:
-                //Backitup
-
-
-                break;
-            case 6:
-                //turn to second beecon
-
-                break;
-            case 7:
-                //go to it
-                targetReached = false;
-
-                majorStep++;
-                break;
-            case 8:
-                //turn to IT 2
-
-                majorStep++;
-                break;
-            case 9:
-                // go to it
-                targetReached = false;
-
-                majorStep++;
-                break;
-            case 10:
-                /**
-                while(!done) {
-                    done = secondBeacon.beaconHitter(colorSensorComponent, motorToEncoderR, motorToEncoderL, ColorValue.RED);
-                 }
-                 **/
-                majorStep = 99;
-                break;
             case 99:
                 getTelemetryUtil().addData("Running: ", "99: ");
                 robot.motorR.setPower(0);
