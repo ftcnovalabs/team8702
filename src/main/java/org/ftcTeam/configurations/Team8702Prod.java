@@ -57,7 +57,9 @@ public class Team8702Prod extends RobotConfiguration {
 
           motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
-          liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
+        motorL.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
           clawMotorR = (DcMotor) getHardwareOn("clawMotorR", hardwareMap.dcMotor);
         clawMotorL = (DcMotor) getHardwareOn("clawMotorL", hardwareMap.dcMotor);
        mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);

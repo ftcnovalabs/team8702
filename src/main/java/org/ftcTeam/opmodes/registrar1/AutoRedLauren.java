@@ -130,8 +130,21 @@ public class AutoRedLauren extends ActiveOpMode {
 //                }
 //
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
-                majorStep++;
+                majorStep=99;
                 break;
+
+
+
+
+
+
+
+
+
+
+
+
+
             case 5:
                 //Backitup
                 targetReached = false;

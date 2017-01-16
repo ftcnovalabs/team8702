@@ -64,15 +64,14 @@ public class EncoderMotorOpMode extends ActiveOpMode {
     @Override
     protected void activeLoop() throws InterruptedException {
         getTelemetryUtil().addData("step: " + step , "current");
-       Thread.sleep(28000);
+       Thread.sleep(24000);
         boolean targetReached = false;
 
         switch (step) {
             case 1:
                 //full power , forward for 1000, 3ft in length
-               targetReached = motorToEncoderR.runToTarget(0.25, 1000,
+               motorToEncoderR.runToTarget(0.25, 1000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-
                 targetReached = motorToEncoderL.runToTarget(0.25, 1000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 getTelemetryUtil().addData("R Current Position: ", motorToEncoderR.motorCurrentPosition());
