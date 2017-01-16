@@ -10,6 +10,16 @@ import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 
 public class RobotAutonomousUtils {
 
+    public static void pauseMotor(DcMotor motorR, DcMotor motorL) {
+        try {
+            motorR.setPower(0);
+            motorL.setPower(0);
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void pauseMotor(MotorToEncoder motorR, MotorToEncoder motorL) {
         try {
             motorR.stop();
