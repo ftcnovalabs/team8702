@@ -13,7 +13,8 @@ public class Registrar1 extends BootstrapRegistrar {
     Class[] classes = {
             AutoRedLauren.class,
             GamePadDriveOpMode.class,
-            EncoderMotorOpMode.class
+            EncoderMotorOpMode.class,
+            AutoODEncoder.class
     };
 
     return classes;
