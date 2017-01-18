@@ -95,7 +95,19 @@ public class AutoODEncoder extends ActiveOpMode {
                     RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
                 }
                 break;
-            case 2: //Turn left towards the beacon
+            case 2: // Run 12 inches
+                targetReached = false;
+                getTelemetryUtil().addData("Current Major Step: ", majorStep);
+                while(!targetReached) {
+                    targetReached  = tankDriveToEncoder.runToTarget(0.2, 700 ,
+                            DriveDirection.DRIVE_FORWARD,DcMotor.RunMode.RUN_USING_ENCODER);
+                }
+                RobotAutonomousUtils.pauseMotor(robot.motorR, robot.motorL);
+                getTelemetryUtil().sendTelemetry();
+                majorStep = 99;
+
+                break;
+            case 3: //Turn left towards the beacon
                 targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 while(!targetReached) {
@@ -107,7 +119,7 @@ public class AutoODEncoder extends ActiveOpMode {
                 majorStep++;
 
                 break;
-            case 3: //Go straight to in front of the beacon
+            case 4: //Go straight to in front of the beacon
                 targetReached = false;
                 double power = 0.05;
                 //brightness assumes fixed distance from the target
