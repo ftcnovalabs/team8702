@@ -1,4 +1,4 @@
-package org.ftcTeam.opmodes.registrar2;
+package org.ftcTeam.opmodes.prototype;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;

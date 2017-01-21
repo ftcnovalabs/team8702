@@ -1,13 +1,13 @@
-package org.ftcTeam.opmodes.registrar1;
+package org.ftcTeam.opmodes.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.ftcTeam.configurations.Team8702Auto;
-import org.ftcTeam.opmodes.AutoStepEncoder;
-import org.ftcTeam.opmodes.BeaconHitter;
-import org.ftcTeam.opmodes.ColorValue;
-import org.ftcTeam.opmodes.RobotAutonomousUtils;
+import org.ftcTeam.opmodes.utils.AutoStepEncoder;
+import org.ftcTeam.opmodes.utils.BeaconHitter;
+import org.ftcTeam.opmodes.utils.ColorValue;
+import org.ftcTeam.opmodes.utils.RobotAutonomousUtils;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 import org.ftcbootstrap.components.utils.MotorDirection;

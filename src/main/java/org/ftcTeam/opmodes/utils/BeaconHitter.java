@@ -1,4 +1,4 @@
-package org.ftcTeam.opmodes;
+package org.ftcTeam.opmodes.utils;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
