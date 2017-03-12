@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
 
 import org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity;
-import org.ftcTeam.opmodes.registrar1.Registrar1;
+import org.ftcTeam.opmodes.test.test;
 
 
 public class FTCTeamControllerActivity extends FtcRobotControllerActivity {
@@ -13,7 +13,11 @@ public class FTCTeamControllerActivity extends FtcRobotControllerActivity {
   @Override
   protected OpModeRegister createOpModeRegister() {
 
-      return new Registrar1();
+      return new test();
+    // return new Production();
+    // return new Prototype();
+    // return new test();
+
 
   }
 

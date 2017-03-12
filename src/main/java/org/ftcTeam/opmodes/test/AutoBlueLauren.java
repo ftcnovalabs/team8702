@@ -1,16 +1,16 @@
-package org.ftcTeam.opmodes.registrar1;
+package org.ftcTeam.opmodes.test;
 
-        import com.qualcomm.hardware.adafruit.BNO055IMU;
-        import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import org.ftcTeam.configurations.Team8702Auto;
-        import org.ftcTeam.opmodes.AutoStepEncoder;
-        import org.ftcTeam.opmodes.BeaconHitter;
-        import org.ftcTeam.opmodes.ColorValue;
-        import org.ftcTeam.opmodes.RobotAutonomousUtils;
-        import org.ftcbootstrap.ActiveOpMode;
-        import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
-        import org.ftcbootstrap.components.utils.MotorDirection;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.ftcTeam.configurations.Team8702Auto;
+import org.ftcTeam.opmodes.utils.AutoStepEncoder;
+import org.ftcTeam.opmodes.utils.BeaconHitter;
+import org.ftcTeam.opmodes.utils.ColorValue;
+import org.ftcTeam.opmodes.utils.RobotAutonomousUtils;
+import org.ftcbootstrap.ActiveOpMode;
+import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
+import org.ftcbootstrap.components.utils.MotorDirection;
 
 /**
  * Note: This Exercise assumes that you have used your Robot Controller App to "scan" your hardware and
@@ -25,7 +25,7 @@ package org.ftcTeam.opmodes.registrar1;
  */
 
 @Autonomous
-public class AutoRedLauren extends ActiveOpMode {
+public class AutoBlueLauren extends ActiveOpMode {
 
     private Team8702Auto robot;
 
@@ -88,10 +88,10 @@ public class AutoRedLauren extends ActiveOpMode {
                 while(!targetReached) {
                     getTelemetryUtil().addData("Running: ", "Running1: ");
 
-                    motorToEncoderR.runToTarget(0.2, AutoStepEncoder.BEACON_APPROACH_VALUE_PART_1,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderL.runToTarget(0.2, AutoStepEncoder.BEACON_APPROACH_VALUE_PART_1,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    motorToEncoderR.runToTarget(0.25, AutoStepEncoder.BEACON_APPROACH_VALUE_PART_1,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.BEACON_APPROACH_VALUE_PART_1,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 //getTelemetryUtil().addData("Running: ", "Running99: ");
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
@@ -102,8 +102,8 @@ public class AutoRedLauren extends ActiveOpMode {
                 targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 while(!targetReached) {
-                    targetReached = motorToEncoderL.runToTarget(0.2, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                    RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                     getTelemetryUtil().addData("Current Encoder Position", motorToEncoderR.motorCurrentPosition());
@@ -115,10 +115,10 @@ public class AutoRedLauren extends ActiveOpMode {
                 targetReached = false;
                 getTelemetryUtil().addData("Current Major Step: ", majorStep);
                 while(!targetReached) {
-                    motorToEncoderL.runToTarget(0.2, AutoStepEncoder.APPROACH_BEACON_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderR.runToTarget(0.2, AutoStepEncoder.APPROACH_BEACON_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    motorToEncoderL.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;
@@ -130,29 +130,16 @@ public class AutoRedLauren extends ActiveOpMode {
 //                }
 //
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
-                majorStep=99;
+                majorStep++;
                 break;
-
-
-
-
-
-
-
-
-
-
-
-
-
             case 5:
                 //Backitup
                 targetReached = false;
                 while(!targetReached) {
-                    targetReached = motorToEncoderL.runToTarget(0.2, AutoStepEncoder.APPROACH_BEACON_VALUE,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderR.runToTarget(0.2, AutoStepEncoder.APPROACH_BEACON_VALUE,
-                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;
@@ -162,8 +149,8 @@ public class AutoRedLauren extends ActiveOpMode {
                 //turn to second beecon
                 targetReached = false;
                 while(!targetReached) {
-                    targetReached = motorToEncoderL.runToTarget(0.2, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderR.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep ++;
@@ -172,10 +159,10 @@ public class AutoRedLauren extends ActiveOpMode {
                 //go to it
                 targetReached = false;
                 while(!targetReached) {
-                    targetReached = motorToEncoderL.runToTarget(0.2, AutoStepEncoder.TRANSITION_BEACON_APPROACH_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderR.runToTarget(0.2, AutoStepEncoder.TRANSITION_BEACON_APPROACH_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.TRANSITION_BEACON_APPROACH_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.TRANSITION_BEACON_APPROACH_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;
@@ -184,8 +171,8 @@ public class AutoRedLauren extends ActiveOpMode {
                 //turn to IT 2
                 targetReached = false;
                 while (!targetReached) {
-                    targetReached = motorToEncoderR.runToTarget(0.2, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.1, AutoStepEncoder.NINTY_ANGLE_TURN_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;
@@ -194,10 +181,10 @@ public class AutoRedLauren extends ActiveOpMode {
                 // go to it
                 targetReached = false;
                 while (!targetReached) {
-                    targetReached = motorToEncoderL.runToTarget(0.1, AutoStepEncoder.APPROACH_BEACON_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                    targetReached = motorToEncoderR.runToTarget(0.1, AutoStepEncoder.APPROACH_BEACON_VALUE,
-                            MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderL.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                    targetReached = motorToEncoderR.runToTarget(0.25, AutoStepEncoder.APPROACH_BEACON_VALUE,
+                            MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
                 }
                 RobotAutonomousUtils.pauseMotor(motorToEncoderR, motorToEncoderL);
                 majorStep++;

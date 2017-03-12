@@ -1,4 +1,4 @@
-package org.ftcTeam.opmodes;
+package org.ftcTeam.opmodes.utils;
 
 
 import org.ftcbootstrap.components.ColorSensorComponent;

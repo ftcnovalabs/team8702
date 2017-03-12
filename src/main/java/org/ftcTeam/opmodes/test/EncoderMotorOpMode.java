@@ -1,20 +1,17 @@
-package org.ftcTeam.opmodes;
+package org.ftcTeam.opmodes.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.ftcTeam.configurations.Team8702Test;
+import org.ftcTeam.configurations.Team8702Prod;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 import org.ftcbootstrap.components.utils.MotorDirection;
-import org.ftcbootstrap.components.utils.TelemetryUtil;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.ftcbootstrap.components.ColorSensorComponent;
 
 
 /**
  * Note: This Exercise assumes that you have used your Robot Controller App to "scan" your hardware and
- * saved the configuration named: "DemoBot" and creating a class by the same name: {@link Team8702Test}.
+ * saved the configuration named: "DemoBot" and creating a class by the same name: {@link Team8702Prod}.
  * <p/>
  * Note:  It is assumed that the proper registry is used for this set of demos. To confirm please
  * search for "Enter your custom registry here"  in  {@link org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity;}
@@ -26,14 +23,13 @@ import org.ftcbootstrap.components.ColorSensorComponent;
 
 
 @Autonomous
-public class EncoderMotorOpMode_Original extends ActiveOpMode {
+public class EncoderMotorOpMode extends ActiveOpMode {
 
-    private Team8702Test robot;
+    private Team8702Prod robot;
 
-    private MotorToEncoder motorToEncoder;
+    private MotorToEncoder motorToEncoderR;
     private MotorToEncoder motorToEncoderL;
     private int step;
-    public ColorSensorComponent colorSensorComponent;
 
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
@@ -42,16 +38,14 @@ public class EncoderMotorOpMode_Original extends ActiveOpMode {
     protected void onInit() {
 
         //specify configuration name save from scan operation
-        robot = Team8702Test.newConfig(hardwareMap, getTelemetryUtil());
-        motorToEncoder = new MotorToEncoder(  this, robot.motorR);
-        motorToEncoderL = new MotorToEncoder( this, robot.motorL);
-        motorToEncoder.setName("motor1");
-        motorToEncoder.setName("motor2");
+        robot = Team8702Prod.newConfig(hardwareMap, getTelemetryUtil());
+        motorToEncoderR = new MotorToEncoder(this, robot.motorR);
+        motorToEncoderL = new MotorToEncoder(this, robot.motorL);
+        motorToEncoderR.setName("motorR");
+        motorToEncoderL.setName("motorL");
 
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
-        colorSensorComponent = new ColorSensorComponent(this, robot.mrColor1, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
-        colorSensorComponent.enableLed(true);
 
 
     }
@@ -59,7 +53,7 @@ public class EncoderMotorOpMode_Original extends ActiveOpMode {
     @Override
     protected void onStart() throws InterruptedException  {
         super.onStart();
-        step = 2;
+        step = 1;
     }
 
     /**
@@ -69,41 +63,28 @@ public class EncoderMotorOpMode_Original extends ActiveOpMode {
      */
     @Override
     protected void activeLoop() throws InterruptedException {
-
-        //send any telemetry that may have been added in the above operations
-        getTelemetryUtil().sendTelemetry();
-
-
-
         getTelemetryUtil().addData("step: " + step , "current");
-
+       Thread.sleep(24000);
         boolean targetReached = false;
 
         switch (step) {
             case 1:
-
                 //full power , forward for 1000, 3ft in length
-                targetReached = motorToEncoder.runToTarget(0.5, 1950,
+               motorToEncoderR.runToTarget(0.25, 1000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-
-                targetReached = motorToEncoderL.runToTarget(0.5, 1950,
+                targetReached = motorToEncoderL.runToTarget(0.25, 1000,
                         MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
+                getTelemetryUtil().addData("R Current Position: ", motorToEncoderR.motorCurrentPosition());
+                getTelemetryUtil().addData("L Current Position: ", motorToEncoderL.motorCurrentPosition());
+                getTelemetryUtil().addData("Target Reached: ", targetReached);
                 if (targetReached) {
-                }
-                break;
-
-           case 2:
-                //  90 degree turn Left
-                targetReached = motorToEncoder.runToTarget(1, 1120,
-                        MotorDirection.MOTOR_FORWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-               targetReached = motorToEncoderL.runToTarget(1, 1120,
-                       MotorDirection.MOTOR_BACKWARD, DcMotor.RunMode.RUN_USING_ENCODER);
-                if (targetReached) {
-                    step++;
+                    step = 99;
                 }
                 break;
 
             case 99:
+                motorToEncoderR.stop();
+                motorToEncoderL.stop();
                 getTelemetryUtil().addData("step" + step + " Opmode Status", "Robot Stopped.  Kill switch activated");
                 setOperationsCompleted();
                 break;
