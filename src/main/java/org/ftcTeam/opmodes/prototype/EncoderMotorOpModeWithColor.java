@@ -47,7 +47,7 @@ public class EncoderMotorOpModeWithColor extends ActiveOpMode {
         robot = Team8702Prod.newConfig(hardwareMap, getTelemetryUtil());
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
         getTelemetryUtil().sendTelemetry();
-        colorSensorComponent = new ColorSensorComponent(this, robot.mrColor1, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
+        //colorSensorComponent = new ColorSensorComponent(this, robot.mrColor1, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
         colorSensorComponent.enableLed(false);
 
         getTelemetryUtil().addData("Init", getClass().getSimpleName() + " initialized.");
@@ -71,11 +71,11 @@ public class EncoderMotorOpModeWithColor extends ActiveOpMode {
     protected void activeLoop() throws InterruptedException {
         getTelemetryUtil().addData("step: " + step, "current");
         boolean targetReached = false;
-
-        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
-        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
-        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
-        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
+//
+//        getTelemetryUtil().addData("red", Integer.toString(robot.mrColor1.red()));
+//        getTelemetryUtil().addData("blue", Integer.toString(robot.mrColor1.blue()));
+//        getTelemetryUtil().addData("green", Integer.toString(robot.mrColor1.green()));
+//        getTelemetryUtil().addData("clear", Integer.toString(robot.mrColor1.alpha()));
         //send any telemetry that may have been added in the above operations
         getTelemetryUtil().sendTelemetry();
         getTelemetryUtil().addData("Color", getColor().toString());

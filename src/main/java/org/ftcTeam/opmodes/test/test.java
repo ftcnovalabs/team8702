@@ -1,6 +1,7 @@
 package org.ftcTeam.opmodes.test;
 
 import org.ftcTeam.opmodes.production.GamePadDriveOpMode;
+import org.ftcTeam.opmodes.production.GamePadDriveOpModeTeletest;
 import org.ftcbootstrap.BootstrapRegistrar;
 
 
@@ -15,7 +16,8 @@ public class test extends BootstrapRegistrar {
             AutoRedLauren.class,
             GamePadDriveOpMode.class,
             EncoderMotorOpMode.class,
-            AutoODEncoder.class
+            AutoODEncoder.class,
+            GamePadDriveOpModeTeletest.class
     };
 
     return classes;

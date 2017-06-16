@@ -3,8 +3,8 @@ package org.ftcTeam.configurations;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.ftcbootstrap.RobotConfiguration;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
 
@@ -17,15 +17,13 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
  * It is also assumed that the device names in the 'init()' method below are the same  as the devices named for the
  * saved configuration on the phone.
  */
-public class Team8702Prod extends RobotConfiguration {
+public class Team8702Demo extends RobotConfiguration {
     //51.4 = 1 inch
     //motors
     public DcMotor motorR;
     public DcMotor motorL;
     public DcMotor liftMotor;
-//    public ColorSensor mrColor1;
-    public Servo rightServo;
-    public Servo leftServo;
+    public ColorSensor mrColor1;
 
 
     /**
@@ -35,9 +33,9 @@ public class Team8702Prod extends RobotConfiguration {
      * @param telemetryUtil
      * @return
      */
-    public static Team8702Prod newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
+    public static Team8702Demo newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
 
-        Team8702Prod config = new Team8702Prod();
+        Team8702Demo config = new Team8702Demo();
         config.init(hardwareMap, telemetryUtil);
         return config;
     }
@@ -57,10 +55,9 @@ public class Team8702Prod extends RobotConfiguration {
           motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
           motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
         motorL.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightServo = (Servo) getHardwareOn("servoR", hardwareMap.servo);
-        leftServo = (Servo) getHardwareOn("servoL", hardwareMap.servo);
+
         liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
-//       mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
+       mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
 
     }
 
