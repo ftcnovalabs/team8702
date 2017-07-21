@@ -20,13 +20,10 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
 public class Team8702Prod extends RobotConfiguration {
     //51.4 = 1 inch
     //motors
-    public DcMotor motorR;
-    public DcMotor motorL;
-    public DcMotor liftMotor;
-//    public ColorSensor mrColor1;
-    public Servo rightServo;
-    public Servo leftServo;
-
+    public DcMotor motorBR;
+    public DcMotor motorBL;
+    public DcMotor motorFR;
+    public DcMotor motorFL;
 
     /**
      * Factory method for this class
@@ -54,14 +51,11 @@ public class Team8702Prod extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-          motorR = (DcMotor) getHardwareOn("motorR", hardwareMap.dcMotor);
-          motorL = (DcMotor) getHardwareOn("motorL", hardwareMap.dcMotor);
-        motorL.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightServo = (Servo) getHardwareOn("servoR", hardwareMap.servo);
-        leftServo = (Servo) getHardwareOn("servoL", hardwareMap.servo);
-        liftMotor = (DcMotor) getHardwareOn("liftStick1", hardwareMap.dcMotor);
-//       mrColor1 = (ColorSensor) getHardwareOn("mrColor1", hardwareMap.colorSensor);
-
+          motorBR = (DcMotor) getHardwareOn("motorBR", hardwareMap.dcMotor);
+          motorBL = (DcMotor) getHardwareOn("motorBL", hardwareMap.dcMotor);
+        motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
+            motorFR = (DcMotor) GetHardwareOn("motorFR", hardwareMap.dcMotor);
+        motorFL = (DcMotor) GetHardwareOn("motorFL", hardwareMap.dcMotor);
     }
 
 
