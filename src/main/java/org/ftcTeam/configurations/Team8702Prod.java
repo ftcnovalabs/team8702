@@ -54,8 +54,9 @@ public class Team8702Prod extends RobotConfiguration {
           motorBR = (DcMotor) getHardwareOn("motorBR", hardwareMap.dcMotor);
           motorBL = (DcMotor) getHardwareOn("motorBL", hardwareMap.dcMotor);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
-            motorFR = (DcMotor) GetHardwareOn("motorFR", hardwareMap.dcMotor);
-        motorFL = (DcMotor) GetHardwareOn("motorFL", hardwareMap.dcMotor);
+            motorFR = (DcMotor) getHardwareOn("motorFR", hardwareMap.dcMotor);
+        motorFL = (DcMotor) getHardwareOn("motorFL", hardwareMap.dcMotor);
+        motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
 
