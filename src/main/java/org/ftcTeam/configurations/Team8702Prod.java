@@ -51,12 +51,12 @@ public class Team8702Prod extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-          motorBR = (DcMotor) getHardwareOn("motorBR", hardwareMap.dcMotor);
-          motorBL = (DcMotor) getHardwareOn("motorBL", hardwareMap.dcMotor);
-        motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
-            motorFR = (DcMotor) getHardwareOn("motorFR", hardwareMap.dcMotor);
+        motorBR = (DcMotor) getHardwareOn("motorBR", hardwareMap.dcMotor);
+        motorBL = (DcMotor) getHardwareOn("motorBL", hardwareMap.dcMotor);
+        motorFR = (DcMotor) getHardwareOn("motorFR", hardwareMap.dcMotor);
+            motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFL = (DcMotor) getHardwareOn("motorFL", hardwareMap.dcMotor);
-        motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
+            motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
 

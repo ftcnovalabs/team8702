@@ -5,8 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.ftcTeam.configurations.Team8702Prod;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.GamePadMotor;
-import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
-import org.ftcbootstrap.components.operations.servos.GamePadServo;
+import org.ftcbootstrap.components.operations.motors.GamePadFourWheelDrive;
 
 
 /**
@@ -14,18 +13,14 @@ import org.ftcbootstrap.components.operations.servos.GamePadServo;
  * search for "Enter your custom registry here"  in  {@link org.ftcTeam.FTCTeamControllerActivity}
  * <p/>
  * Summary:  Use an Operation class to perform a tank drive using the gamepad joysticks.
- * See: {@link GamePadTankDrive}
+ * See: {@link GamePadFourWheelDrive}
  */
 
 @TeleOp
 public class GamePadDriveOpModeTeletest extends ActiveOpMode {
 
     private Team8702Prod robot;
-    private GamePadTankDrive gamePadTankDrive;
-    private GamePadMotor liftGamePad;
-    private GamePadServo servoRGamePad;
-    private GamePadServo servoLGamePad;
-
+    private GamePadFourWheelDrive gamePadFourWheelDrive;
     /**
      * Implement this method to define the code to run when the Init button is pressed on the Driver station.
      */
@@ -46,10 +41,7 @@ public class GamePadDriveOpModeTeletest extends ActiveOpMode {
         super.onStart();
 
                       //create the operation  to perform a tank drive using the gamepad joysticks.
-        gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motorR, robot.motorL);
-        liftGamePad = new GamePadMotor(this, gamepad2, robot.liftMotor, GamePadMotor.Control.LEFT_STICK_Y);
-        servoLGamePad = new GamePadServo(this, gamepad2, robot.leftServo, GamePadServo.Control.Y_A, 0.0);
-        servoRGamePad = new GamePadServo(this, gamepad2, robot.rightServo, GamePadServo.Control.X_B, 0.0);
+        gamePadFourWheelDrive = new GamePadFourWheelDrive(this, gamepad1, robot.motorFR, robot.motorFL, robot.motorBL, robot.motorBR);
 
     }
 
@@ -63,10 +55,7 @@ public class GamePadDriveOpModeTeletest extends ActiveOpMode {
     protected void activeLoop() throws InterruptedException {
 
         //update the motors with the gamepad joystick values
-       gamePadTankDrive.update();
-        liftGamePad.update();
-        servoRGamePad.update();
-        servoLGamePad.update();
+       gamePadFourWheelDrive.update();
         getTelemetryUtil().sendTelemetry();
 
     }
